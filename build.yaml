@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      slang_build_runner:
+        options:
+          input_directory: lib/translations
+          output_directory: lib/translations
+          input_file_pattern: .yaml
+          base_locale: pt
