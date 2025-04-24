@@ -1,7 +1,9 @@
 import 'package:ct_morvan_app/consts/app_assets.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
+import 'package:ct_morvan_app/view/main/navigation_menu_view.dart';
 import 'package:ct_morvan_app/widget/app_text_field.dart';
+import 'package:ct_morvan_app/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -48,27 +50,13 @@ class _LoginViewState extends State<LoginView> {
                 prefixIcon: Icon(Icons.password),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Acessar",
-                        style: TextStyle(color: whiteColor),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            PrimaryButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => NavigationMenuView()),
+                );
+              },
+              text: "Acessar",
             ),
           ],
         ),
