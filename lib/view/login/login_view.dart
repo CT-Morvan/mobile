@@ -1,9 +1,8 @@
 import 'package:ct_morvan_app/consts/app_assets.dart';
-import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/view/main/navigation_menu_view.dart';
-import 'package:ct_morvan_app/widget/app_text_field.dart';
-import 'package:ct_morvan_app/widget/primary_button.dart';
+import 'package:ct_morvan_app/view/login/first_login_view.dart';
+import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
+import 'package:ct_morvan_app/widget/primary_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -25,6 +24,7 @@ class _LoginViewState extends State<LoginView> {
           IconButton(onPressed: () {}, icon: Icon(Icons.help_outline_outlined)),
         ],
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -32,9 +32,9 @@ class _LoginViewState extends State<LoginView> {
             Image.asset(ctMorvanLogo),
             Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: AppTextField(
+              child: AppTextFieldWidget(
                 controller: emailController,
-                hint: "email@gmail.com",
+                hint: t.emailHint,
                 label: t.email,
                 maxLines: 1,
                 prefixIcon: Icon(Icons.mail_outline_rounded),
@@ -42,21 +42,21 @@ class _LoginViewState extends State<LoginView> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: AppTextField(
+              child: AppTextFieldWidget(
                 controller: passwordController,
-                label: "Senha",
+                label: t.password,
                 maxLines: 1,
                 obscureText: true,
                 prefixIcon: Icon(Icons.password),
               ),
             ),
-            PrimaryButton(
+            PrimaryButtonWidget(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => NavigationMenuView()),
+                  MaterialPageRoute(builder: (context) => FirstLoginView()),
                 );
               },
-              text: "Acessar",
+              text: t.access,
             ),
           ],
         ),

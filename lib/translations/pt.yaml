@@ -1,1 +1,19 @@
-email: email
+ctMorvan: CT Morvan
+email: E-mail
+emailHint: email@gmail.com
+name: Nome
+nameHint: Nome Sobrenome
+password: Senha
+confirmPassword: Confirmar senha
+passwordRequirements: A senha precisa ter pelo menos 8 caracteres, sendo uma letra, um número, e um caractere especial
+passwordAreNotTheSame: As senhas não são iguais
+changePassword: Trocar senha
+logout: Logout
+access: Acessar
+createUser: Criar usuário
+users: Usuários
+tests: Testes
+adminUser: Usuário administrador
+welcomeTitle: Bem vindo ao CT Morvan $name!
+welcomeDescription: Para continuar precisamos criar uma senha!
+continue: Continuar

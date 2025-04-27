@@ -1,7 +1,9 @@
-import 'package:ct_morvan_app/consts/app_assets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/widget/primary_button.dart';
-import 'package:ct_morvan_app/widget/secondary_button.dart';
+import 'package:ct_morvan_app/translations/strings.g.dart';
+import 'package:ct_morvan_app/view/login/change_password_view.dart';
+import 'package:ct_morvan_app/widget/primary_button_widget.dart';
+import 'package:ct_morvan_app/widget/secondary_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class UserView extends StatefulWidget {
@@ -22,9 +24,23 @@ class _UserViewState extends State<UserView> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ClipOval(
-                child: Image.asset(
-                  ctMorvanLogo, //todo foto do usuario
+                child: SizedBox(
                   height: 200,
+                  width: 200,
+                  child: CachedNetworkImage(
+                    imageUrl: "https://picsum.photos/200",
+                    placeholder:
+                        (context, url) => Center(
+                          child: SizedBox(
+                            height: 48,
+                            width: 48,
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
+                            ),
+                          ),
+                        ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
               ),
             ),
@@ -45,15 +61,19 @@ class _UserViewState extends State<UserView> {
             ),
           ),
           Expanded(child: SizedBox()),
-          PrimaryButton(
-            onPressed: () {},
-            text: "Trocar Senha",
+          PrimaryButtonWidget(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ChangePasswordView()),
+              );
+            },
+            text: t.changePassword,
             padding: EdgeInsets.zero,
           ),
-          SecondaryButton(
+          SecondaryButtonWidget(
             padding: EdgeInsets.only(bottom: 16),
             onPressed: () {},
-            text: "Logout",
+            text: t.logout,
           ),
         ],
       ),

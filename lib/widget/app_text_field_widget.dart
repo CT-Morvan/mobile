@@ -1,7 +1,7 @@
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final int? maxLines;
   final String label;
@@ -9,7 +9,7 @@ class AppTextField extends StatelessWidget {
   final bool obscureText;
   final Widget? prefixIcon;
 
-  const AppTextField({
+  const AppTextFieldWidget({
     super.key,
     required this.controller,
     required this.label,

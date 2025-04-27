@@ -1,4 +1,5 @@
 import 'package:ct_morvan_app/consts/app_colors.dart';
+import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/tests/tests_view.dart';
 import 'package:ct_morvan_app/view/user/list_users_view.dart';
 import 'package:ct_morvan_app/view/user/user_view.dart';
@@ -14,7 +15,9 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    TestsView(),
+    //todo: essa tela aq so vai ser exibida por users comuns
+    // TestsView(),
+    //todo: essa tela so vai ser exibida se o usuario for adm
     ListUsersView(),
     UserView(),
   ];
@@ -32,11 +35,12 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
         appBar: AppBar(
           backgroundColor: primaryColor,
           centerTitle: true,
-          title: Text("CT Morvan"),
+          title: Text(t.ctMorvan, style: TextStyle(color: Colors.white)),
+          automaticallyImplyLeading: false,
           actions: [
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.help_outline_outlined),
+              icon: Icon(Icons.help_outline_outlined, color: Colors.white),
             ),
           ],
         ),
@@ -45,11 +49,8 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
           child: BottomNavigationBar(
             backgroundColor: whiteColor,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "testes"),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.people),
-                label: "Usuários",
-              ),
+              // BottomNavigationBarItem(icon: Icon(Icons.home), label: t.tests),
+              BottomNavigationBarItem(icon: Icon(Icons.people), label: t.users),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: "Lucas",

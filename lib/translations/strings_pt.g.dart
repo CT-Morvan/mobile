@@ -39,7 +39,25 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	String get email => 'email';
+	String get ctMorvan => 'CT Morvan';
+	String get email => 'E-mail';
+	String get emailHint => 'email@gmail.com';
+	String get name => 'Nome';
+	String get nameHint => 'Nome Sobrenome';
+	String get password => 'Senha';
+	String get confirmPassword => 'Confirmar senha';
+	String get passwordRequirements => 'A senha precisa ter pelo menos 8 caracteres, sendo uma letra, um número, e um caractere especial';
+	String get passwordAreNotTheSame => 'As senhas não são iguais';
+	String get changePassword => 'Trocar senha';
+	String get logout => 'Logout';
+	String get access => 'Acessar';
+	String get createUser => 'Criar usuário';
+	String get users => 'Usuários';
+	String get tests => 'Testes';
+	String get adminUser => 'Usuário administrador';
+	String welcomeTitle({required Object name}) => 'Bem vindo ao CT Morvan ${name}!';
+	String get welcomeDescription => 'Para continuar precisamos criar uma senha!';
+	String get kContinue => 'Continuar';
 }
 
 /// Flat map(s) containing all translations.
@@ -47,7 +65,25 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'email': return 'email';
+			case 'ctMorvan': return 'CT Morvan';
+			case 'email': return 'E-mail';
+			case 'emailHint': return 'email@gmail.com';
+			case 'name': return 'Nome';
+			case 'nameHint': return 'Nome Sobrenome';
+			case 'password': return 'Senha';
+			case 'confirmPassword': return 'Confirmar senha';
+			case 'passwordRequirements': return 'A senha precisa ter pelo menos 8 caracteres, sendo uma letra, um número, e um caractere especial';
+			case 'passwordAreNotTheSame': return 'As senhas não são iguais';
+			case 'changePassword': return 'Trocar senha';
+			case 'logout': return 'Logout';
+			case 'access': return 'Acessar';
+			case 'createUser': return 'Criar usuário';
+			case 'users': return 'Usuários';
+			case 'tests': return 'Testes';
+			case 'adminUser': return 'Usuário administrador';
+			case 'welcomeTitle': return ({required Object name}) => 'Bem vindo ao CT Morvan ${name}!';
+			case 'welcomeDescription': return 'Para continuar precisamos criar uma senha!';
+			case 'kContinue': return 'Continuar';
 			default: return null;
 		}
 	}
