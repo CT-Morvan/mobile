@@ -17,3 +17,6 @@ adminUser: Usuário administrador
 welcomeTitle: Bem vindo ao CT Morvan $name!
 welcomeDescription: Para continuar precisamos criar uma senha!
 continue: Continuar
+date: Data
+maximumRep: Carga máxima
+maximumRepTest: Teste de carga

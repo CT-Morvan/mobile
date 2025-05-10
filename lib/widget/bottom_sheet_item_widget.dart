@@ -102,5 +102,6 @@ class UserListItemWidget extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }

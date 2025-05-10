@@ -58,6 +58,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String welcomeTitle({required Object name}) => 'Bem vindo ao CT Morvan ${name}!';
 	String get welcomeDescription => 'Para continuar precisamos criar uma senha!';
 	String get kContinue => 'Continuar';
+	String get date => 'Data';
+	String get maximumRep => 'Carga máxima';
+	String get maximumRepTest => 'Teste de carga';
 }
 
 /// Flat map(s) containing all translations.
@@ -84,6 +87,9 @@ extension on Translations {
 			case 'welcomeTitle': return ({required Object name}) => 'Bem vindo ao CT Morvan ${name}!';
 			case 'welcomeDescription': return 'Para continuar precisamos criar uma senha!';
 			case 'kContinue': return 'Continuar';
+			case 'date': return 'Data';
+			case 'maximumRep': return 'Carga máxima';
+			case 'maximumRepTest': return 'Teste de carga';
 			default: return null;
 		}
 	}

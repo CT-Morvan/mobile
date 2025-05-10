@@ -52,61 +52,66 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(ctMorvanLogo),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: AppTextFieldWidget(
-                controller: passwordController,
-                label: t.password,
-                maxLines: 1,
-                obscureText: true,
-                prefixIcon: Icon(Icons.password),
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(ctMorvanLogo),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: AppTextFieldWidget(
+                  controller: passwordController,
+                  label: t.password,
+                  maxLines: 1,
+                  obscureText: true,
+                  prefixIcon: Icon(Icons.password),
+                ),
               ),
-            ),
-            Visibility(
-              visible: hasErrorPassword,
-              child: Text(
-                t.passwordRequirements,
-                style: TextStyle(color: Colors.red, fontSize: 12),
+              Visibility(
+                visible: hasErrorPassword,
+                child: Text(
+                  t.passwordRequirements,
+                  style: TextStyle(color: Colors.red, fontSize: 12),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: AppTextFieldWidget(
-                controller: confirmPasswordController,
-                label: t.confirmPassword,
-                maxLines: 1,
-                obscureText: true,
-                prefixIcon: Icon(Icons.password),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: AppTextFieldWidget(
+                  controller: confirmPasswordController,
+                  label: t.confirmPassword,
+                  maxLines: 1,
+                  obscureText: true,
+                  prefixIcon: Icon(Icons.password),
+                ),
               ),
-            ),
-            Visibility(
-              visible: hasErrorConfirmPassword,
-              child: Text(
-                t.passwordAreNotTheSame,
-                style: TextStyle(color: Colors.red, fontSize: 12),
+              Visibility(
+                visible: hasErrorConfirmPassword,
+                child: Text(
+                  t.passwordAreNotTheSame,
+                  style: TextStyle(color: Colors.red, fontSize: 12),
+                ),
               ),
-            ),
-            PrimaryButtonWidget(
-              enabled:
-                  passwordController.text.isNotEmpty &&
-                  passwordController.text.isNotEmpty &&
-                  !hasErrorPassword &&
-                  !hasErrorConfirmPassword,
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => NavigationMenuView()),
-                );
-              },
-              text: t.kContinue,
-            ),
-          ],
+              PrimaryButtonWidget(
+                enabled:
+                    passwordController.text.isNotEmpty &&
+                    passwordController.text.isNotEmpty &&
+                    !hasErrorPassword &&
+                    !hasErrorConfirmPassword,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NavigationMenuView(),
+                    ),
+                  );
+                },
+                text: t.kContinue,
+              ),
+            ],
+          ),
         ),
       ),
     );

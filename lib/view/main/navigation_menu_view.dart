@@ -16,9 +16,9 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     //todo: essa tela aq so vai ser exibida por users comuns
-    // TestsView(),
+    TestsView(),
     //todo: essa tela so vai ser exibida se o usuario for adm
-    ListUsersView(),
+    // ListUsersView(),
     UserView(),
   ];
 
@@ -49,8 +49,8 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
           child: BottomNavigationBar(
             backgroundColor: whiteColor,
             items: [
-              // BottomNavigationBarItem(icon: Icon(Icons.home), label: t.tests),
-              BottomNavigationBarItem(icon: Icon(Icons.people), label: t.users),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: t.tests),
+              // BottomNavigationBarItem(icon: Icon(Icons.people), label: t.users),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: "Lucas",
