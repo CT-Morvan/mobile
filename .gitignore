@@ -38,6 +38,10 @@ migrate_working_dir/
 /web/
 /windows/
 
+# generated files
+*.g.dart
+*.gr.dart
+
 # Symbolication related
 app.*.symbols
 

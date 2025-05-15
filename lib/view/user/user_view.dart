@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
@@ -6,6 +7,7 @@ import 'package:ct_morvan_app/widget/primary_button_widget.dart';
 import 'package:ct_morvan_app/widget/secondary_button_widget.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage(name: "UserViewRoute")
 class UserView extends StatefulWidget {
   const UserView({super.key});
   @override

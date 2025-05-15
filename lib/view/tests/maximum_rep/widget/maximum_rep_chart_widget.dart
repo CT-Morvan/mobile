@@ -1,6 +1,6 @@
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/view/models/tests/maximum_rep/maximum_rep_model.dart';
+import 'package:ct_morvan_app/models/tests/maximum_rep/maximum_rep_model.dart';
 import 'package:flutter/material.dart';
 import 'package:graphic/graphic.dart';
 import 'package:intl/intl.dart';

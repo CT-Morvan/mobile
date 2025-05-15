@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage(name: "CreateUserViewRoute")
 class CreateUserView extends StatefulWidget {
   const CreateUserView({super.key});
 

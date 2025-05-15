@@ -7,3 +7,6 @@ targets:
           output_directory: lib/translations
           input_file_pattern: .yaml
           base_locale: pt
+      json_serialize:
+        options:
+          explicit_to_json: true

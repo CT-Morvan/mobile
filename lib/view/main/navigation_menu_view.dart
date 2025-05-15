@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/tests/tests_view.dart';
@@ -5,6 +6,7 @@ import 'package:ct_morvan_app/view/user/list_users_view.dart';
 import 'package:ct_morvan_app/view/user/user_view.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage(name: "NavigationMenuViewRoute")
 class NavigationMenuView extends StatefulWidget {
   const NavigationMenuView({super.key});
   @override
@@ -18,7 +20,7 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
     //todo: essa tela aq so vai ser exibida por users comuns
     TestsView(),
     //todo: essa tela so vai ser exibida se o usuario for adm
-    // ListUsersView(),
+    ListUsersView(),
     UserView(),
   ];
 
@@ -50,7 +52,7 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
             backgroundColor: whiteColor,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: t.tests),
-              // BottomNavigationBarItem(icon: Icon(Icons.people), label: t.users),
+              BottomNavigationBarItem(icon: Icon(Icons.people), label: t.users),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: "Lucas",

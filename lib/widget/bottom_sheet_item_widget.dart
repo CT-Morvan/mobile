@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/view/models/user.dart';
+import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class UserListItemWidget extends StatelessWidget {
-  final User user;
+  final UserModel user;
   const UserListItemWidget({super.key, required this.user});
 
   @override

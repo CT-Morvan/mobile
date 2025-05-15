@@ -1,16 +1,28 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/translations/plural_resolver..dart';
+import 'package:ct_morvan_app/routes/ct_morvan_routes.dart';
+import 'package:ct_morvan_app/translations/plural_resolver.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/view/login/login_view.dart';
+import 'package:ct_morvan_app/view/tests/maximum_rep/maximum_rep_form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(TranslationProvider(child: const MyApp()));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => DynamicFormData(),
+      child: TranslationProvider(child: MyApp()),
+    ),
+  );
 }
 
+final appRouter = CtMorvanRoutes();
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final scaffoldMessenger = GlobalKey<ScaffoldMessengerState>();
+  
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -19,8 +31,9 @@ class MyApp extends StatelessWidget {
     LocaleSettings.useDeviceLocale();
     setPluralResolver();
 
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      scaffoldMessengerKey: scaffoldMessenger,
+      title: 'CT Morvan',
       locale: TranslationProvider.of(context).flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
@@ -38,7 +51,8 @@ class MyApp extends StatelessWidget {
           labelStyle: TextStyle(color: textColor),
         ),
       ),
-      home: const LoginView(),
+      routerDelegate: appRouter.delegate(navigatorObservers: () => [AutoRouteObserver()],),
+      routeInformationParser: appRouter.defaultRouteParser(),
     );
   }
 }

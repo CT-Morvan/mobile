@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_assets.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/main/navigation_menu_view.dart';
@@ -5,6 +6,7 @@ import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
 import 'package:ct_morvan_app/widget/primary_button_widget.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage(name: "ChangePasswordViewRoute")
 class ChangePasswordView extends StatefulWidget {
   const ChangePasswordView({super.key});
   @override

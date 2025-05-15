@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/view/models/user.dart';
+import 'package:ct_morvan_app/models/user_model.dart';
+import 'package:ct_morvan_app/view/tests/maximum_rep/maximum_rep_form_view.dart';
 import 'package:flutter/material.dart';
 
 class UserListItemWidget extends StatelessWidget {
-  final User user;
+  final UserModel user;
   const UserListItemWidget({super.key, required this.user});
 
   @override
@@ -15,27 +16,30 @@ class UserListItemWidget extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return SizedBox(
-                height: 200,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Text('Modal BottomSheet'),
-                      ElevatedButton(
-                        child: const Text('Close BottomSheet'),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => MaximumRepFormView()));
+          // showModalBottomSheet<void>(
+          //   context: context,
+          //   builder: (BuildContext context) {
+          //     return SizedBox(
+          //       height: 200,
+          //       child: Center(
+          //         child: Column(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: <Widget>[
+          //             const Text('Modal BottomSheet'),
+          //             ElevatedButton(
+          //               child: const Text('Close BottomSheet'),
+          //               onPressed: () => Navigator.pop(context),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     );
+          //   },
+          // );
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
