@@ -1,8 +1,8 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_assets.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
+import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/view/login/change_password_view.dart';
 import 'package:ct_morvan_app/widget/primary_button_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +37,7 @@ class _FirstLoginViewState extends State<FirstLoginView> {
             ),
             PrimaryButtonWidget(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ChangePasswordView()),
-                );
+                AutoRouter.of(context).push(ChangePasswordViewRoute());
               },
               text: t.kContinue,
             ),

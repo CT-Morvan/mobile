@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
-import 'package:ct_morvan_app/view/user/create_user_view.dart';
+import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/view/user/widget/user_list_item_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -37,11 +37,9 @@ class _ListUsersViewState extends State<ListUsersView> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => CreateUserView()))
-              .then((_) {
-                fetchData();
-              });
+          AutoRouter.of(context).push(CreateUserViewRoute()).then((_) {
+            fetchData();
+          });
         },
         child: Icon(Icons.add, color: Colors.white),
       ),

@@ -10,6 +10,7 @@ class UserModel {
   final String? userName;
   final String? password;
   final bool? isAdmin;
+  final String? token;
 
   UserModel({
     this.id,
@@ -18,6 +19,7 @@ class UserModel {
     this.userName,
     this.password,
     this.isAdmin = false,
+    this.token,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

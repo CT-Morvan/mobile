@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/view/tests/maximum_rep/maximum_rep_results_view.dart';
+import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage(name: "TestsViewRoute")
@@ -25,11 +25,7 @@ class _TestsViewState extends State<TestsView> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MaximumRepResultsView(),
-                    ),
-                  );
+                  AutoRouter.of(context).push(MaximumRepFormViewRoute());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),
