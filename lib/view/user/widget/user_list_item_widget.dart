@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
-import 'package:ct_morvan_app/view/tests/maximum_rep/maximum_rep_form_view.dart';
+import 'package:ct_morvan_app/view/tests/maximum_rep/form/maximum_rep_form_view.dart';
 import 'package:flutter/material.dart';
 
 class UserListItemWidget extends StatelessWidget {

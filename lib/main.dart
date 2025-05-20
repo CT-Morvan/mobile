@@ -3,25 +3,18 @@ import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.dart';
 import 'package:ct_morvan_app/translations/plural_resolver.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/view/tests/maximum_rep/maximum_rep_form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => DynamicFormData(),
-      child: TranslationProvider(child: MyApp()),
-    ),
-  );
+  runApp(TranslationProvider(child: MyApp()));
 }
 
 final appRouter = CtMorvanRoutes();
 
 class MyApp extends StatelessWidget {
   final scaffoldMessenger = GlobalKey<ScaffoldMessengerState>();
-  
+
   MyApp({super.key});
 
   // This widget is the root of your application.
@@ -51,7 +44,9 @@ class MyApp extends StatelessWidget {
           labelStyle: TextStyle(color: textColor),
         ),
       ),
-      routerDelegate: appRouter.delegate(navigatorObservers: () => [AutoRouteObserver()],),
+      routerDelegate: appRouter.delegate(
+        navigatorObservers: () => [AutoRouteObserver()],
+      ),
       routeInformationParser: appRouter.defaultRouteParser(),
     );
   }

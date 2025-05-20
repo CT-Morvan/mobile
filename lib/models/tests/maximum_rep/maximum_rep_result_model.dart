@@ -14,7 +14,7 @@ class MaximumRepResultModel {
     required this.exerciseId,
     required this.results,
   });
-  
+
   factory MaximumRepResultModel.fromJson(Map<String, dynamic> json) =>
       _$MaximumRepResultModelFromJson(json);
 
