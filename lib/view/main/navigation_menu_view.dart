@@ -35,9 +35,7 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: primaryColor,
-          centerTitle: true,
-          title: Text(t.ctMorvan, style: TextStyle(color: Colors.white)),
+          title: Text(t.ctMorvan),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(

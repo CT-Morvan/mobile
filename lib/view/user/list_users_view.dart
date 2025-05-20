@@ -28,6 +28,7 @@ class _ListUsersViewState extends State<ListUsersView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 8),
         itemBuilder: (buildContext, index) {
           return UserListItemWidget(user: users[index]);
@@ -35,7 +36,6 @@ class _ListUsersViewState extends State<ListUsersView> {
         itemCount: users.length,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryColor,
         onPressed: () {
           AutoRouter.of(context).push(CreateUserViewRoute()).then((_) {
             fetchData();

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/tests/maximum_rep/exercise_model.dart';
@@ -30,11 +31,12 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        centerTitle: true,
-        title: Text(t.maximumRepTest, style: TextStyle(color: Colors.white)),
-        automaticallyImplyLeading: false,
+      appBar: AppBar(title: Text(t.maximumRepTest)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print(jsonEncode(items));
+        },
+        child: Icon(Icons.check, color: whiteColor),
       ),
       body: BlocConsumer<MaxRepFormBloc, MaxRepFormState>(
         listener: (context, state) {
@@ -58,6 +60,7 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
           }
 
           return ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];
@@ -84,15 +87,14 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
                       ),
                       const SizedBox(height: 16),
                       AppTextFieldWidget(
-                        label: 'Máximo de repetições',
+                        label: t.maxReps,
                         onChanged: (value) {
                           setState(() {
-                            item.maxRep = int.parse(value);
+                            item.maxRep =
+                                value.isNotEmpty ? int.parse(value) : 0;
                           });
                         },
-                        controller: TextEditingController(
-                          text: item.maxRep == 0 ? "" : item.maxRep.toString(),
-                        ),
+                        controller: item.maxRepController,
                         textInputType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -100,19 +102,15 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
                       ),
                       const SizedBox(height: 16),
                       AppTextFieldWidget(
-                        label: 'Carga utilizada',
+                        label: t.maxWorkload,
                         onChanged: (value) {
                           setState(() {
-                            item.workload = double.parse(value);
+                            item.workload =
+                                value.isNotEmpty ? double.parse(value) : 0;
                           });
                         },
-                        controller: TextEditingController(
-                          text:
-                              item.workload == 0
-                                  ? ""
-                                  : item.workload.toString(),
-                        ),
-                        suffixText: "kg",
+                        controller: item.workloadController,
+                        suffixText: t.kg,
                         textInputType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,

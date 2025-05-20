@@ -20,3 +20,6 @@ continue: Continuar
 date: Data
 maximumRep: Carga máxima
 maximumRepTest: Teste de carga
+maxReps: Máximo de repetições
+maxWorkload: Carga utilizada
+kg: kg

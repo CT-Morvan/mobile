@@ -84,7 +84,6 @@ class _CreateUserViewState extends State<CreateUserView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryColor,
         onPressed: () {},
         child: Icon(Icons.check, color: Colors.white),
       ),

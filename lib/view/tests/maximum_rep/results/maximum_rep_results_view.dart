@@ -53,15 +53,11 @@ class _MaximumRepResultsViewState extends State<MaximumRepResultsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        centerTitle: true,
-        title: Text(t.maximumRepTest, style: TextStyle(color: Colors.white)),
-        automaticallyImplyLeading: false,
-      ),
+      appBar: AppBar(title: Text(t.maximumRepTest)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: ListView.separated(
+          physics: BouncingScrollPhysics(),
           separatorBuilder: (context, index) => Divider(),
           itemBuilder: (context, index) {
             return MaximumRepChartWidget(

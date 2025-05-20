@@ -34,7 +34,16 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primaryColor: primaryColor,
         scaffoldBackgroundColor: backgroundColor,
-        appBarTheme: AppBarTheme(backgroundColor: primaryColor),
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: primaryColor,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
         inputDecorationTheme: InputDecorationTheme(
           activeIndicatorBorder: BorderSide(color: primaryColor),
           focusColor: primaryColor,
@@ -42,6 +51,9 @@ class MyApp extends StatelessWidget {
             borderSide: BorderSide(color: primaryColor),
           ),
           labelStyle: TextStyle(color: textColor),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: primaryColor,
         ),
       ),
       routerDelegate: appRouter.delegate(

@@ -3,7 +3,7 @@ import 'package:ct_morvan_app/consts/app_assets.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/view/login/login/bloc/login_bloc.dart';
+import 'package:ct_morvan_app/view/login/bloc/login_bloc.dart';
 import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
 import 'package:ct_morvan_app/widget/primary_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,6 @@ class _LoginViewState extends State<LoginView> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         forceMaterialTransparency: true,
-
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.help_outline_outlined)),
         ],

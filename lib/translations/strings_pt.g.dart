@@ -61,6 +61,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get date => 'Data';
 	String get maximumRep => 'Carga máxima';
 	String get maximumRepTest => 'Teste de carga';
+	String get maxReps => 'Máximo de repetições';
+	String get maxWorkload => 'Carga utilizada';
+	String get kg => 'kg';
 }
 
 /// Flat map(s) containing all translations.
@@ -90,6 +93,9 @@ extension on Translations {
 			case 'date': return 'Data';
 			case 'maximumRep': return 'Carga máxima';
 			case 'maximumRepTest': return 'Teste de carga';
+			case 'maxReps': return 'Máximo de repetições';
+			case 'maxWorkload': return 'Carga utilizada';
+			case 'kg': return 'kg';
 			default: return null;
 		}
 	}
