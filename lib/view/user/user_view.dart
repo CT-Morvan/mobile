@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/widget/primary_button_widget.dart';
 import 'package:ct_morvan_app/widget/secondary_button_widget.dart';
+import 'package:ct_morvan_app/widget/user_image_widget.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage(name: "UserViewRoute")
@@ -25,26 +25,7 @@ class _UserViewState extends State<UserView> {
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              child: ClipOval(
-                child: SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: CachedNetworkImage(
-                    imageUrl: "https://picsum.photos/200",
-                    placeholder:
-                        (context, url) => Center(
-                          child: SizedBox(
-                            height: 48,
-                            width: 48,
-                            child: CircularProgressIndicator(
-                              color: primaryColor,
-                            ),
-                          ),
-                        ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ),
-              ),
+              child: UserImageWidget(size: 200, borderWidth: 4),
             ),
           ),
           Padding(

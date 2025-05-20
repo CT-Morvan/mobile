@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/view/user/widget/user_list_item_widget.dart';
@@ -14,13 +13,20 @@ class ListUsersView extends StatefulWidget {
 
 class _ListUsersViewState extends State<ListUsersView> {
   List<UserModel> users = [
-    UserModel(name: "Lucas Sabino", pictureUrl: "https://picsum.photos/200"),
-    UserModel(name: "Bruno Fischer", pictureUrl: "https://picsum.photos/200"),
-    UserModel(name: "Matheus Grawe", pictureUrl: "https://picsum.photos/200"),
     UserModel(
-      name:
-          "Matheus Grawe Matheus GraweMatheus GraweMatheus GraweMatheus Grawe",
+      name: "Lucas Sabino",
       pictureUrl: "https://picsum.photos/200",
+      id: 1,
+    ),
+    UserModel(
+      name: "Bruno Fischer",
+      pictureUrl: "https://picsum.photos/200",
+      id: 1,
+    ),
+    UserModel(
+      name: "Matheus Grawe",
+      pictureUrl: "https://picsum.photos/200",
+      id: 1,
     ),
   ];
 
