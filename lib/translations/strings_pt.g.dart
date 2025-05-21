@@ -66,6 +66,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get kg => 'kg';
 	String get storeTests => 'Criar testes';
 	String get bioimpedance => 'Bioimpedância';
+	String get genericError => 'Ocorreu um erro inesperado';
 }
 
 /// Flat map(s) containing all translations.
@@ -100,6 +101,7 @@ extension on Translations {
 			case 'kg': return 'kg';
 			case 'storeTests': return 'Criar testes';
 			case 'bioimpedance': return 'Bioimpedância';
+			case 'genericError': return 'Ocorreu um erro inesperado';
 			default: return null;
 		}
 	}

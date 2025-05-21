@@ -25,3 +25,4 @@ maxWorkload: Carga utilizada
 kg: kg
 storeTests: Criar testes
 bioimpedance: Bioimpedância
+genericError: Ocorreu um erro inesperado

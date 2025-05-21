@@ -13,21 +13,9 @@ class ListUsersView extends StatefulWidget {
 
 class _ListUsersViewState extends State<ListUsersView> {
   List<UserModel> users = [
-    UserModel(
-      name: "Lucas Sabino",
-      pictureUrl: "https://picsum.photos/200",
-      id: 1,
-    ),
-    UserModel(
-      name: "Bruno Fischer",
-      pictureUrl: "https://picsum.photos/200",
-      id: 1,
-    ),
-    UserModel(
-      name: "Matheus Grawe",
-      pictureUrl: "https://picsum.photos/200",
-      id: 1,
-    ),
+    UserModel(name: "Lucas Sabino", id: 1),
+    UserModel(name: "Bruno Fischer", id: 1),
+    UserModel(name: "Matheus Grawe", id: 1),
   ];
 
   @override

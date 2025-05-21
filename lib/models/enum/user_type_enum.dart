@@ -1,0 +1,5 @@
+
+enum UserTypeEnum{
+  admin,
+  patient
+}

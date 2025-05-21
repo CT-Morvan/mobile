@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -41,29 +40,29 @@ class UserListItemWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: ClipOval(
-                  child: SizedBox(
-                    height: 52,
-                    width: 52,
-                    child: CachedNetworkImage(
-                      imageUrl: user.pictureUrl ?? "",
-                      placeholder:
-                          (context, url) => Center(
-                            child: SizedBox(
-                              height: 32,
-                              width: 32,
-                              child: CircularProgressIndicator(
-                                color: primaryColor,
-                              ),
-                            ),
-                          ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 8),
+              //   child: ClipOval(
+              //     child: SizedBox(
+              //       height: 52,
+              //       width: 52,
+              //       child: CachedNetworkImage(
+              //         imageUrl: user.pictureUrl ?? "",
+              //         placeholder:
+              //             (context, url) => Center(
+              //               child: SizedBox(
+              //                 height: 32,
+              //                 width: 32,
+              //                 child: CircularProgressIndicator(
+              //                   color: primaryColor,
+              //                 ),
+              //               ),
+              //             ),
+              //         errorWidget: (context, url, error) => Icon(Icons.error),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Expanded(
                 child: Text(
                   user.name ?? "",

@@ -1,3 +1,4 @@
+import 'package:ct_morvan_app/models/enum/user_type_enum.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
@@ -6,21 +7,11 @@ part 'user_model.g.dart';
 class UserModel {
   final int? id;
   final String? name;
-  final String? pictureUrl;
-  final String? userName;
-  final String? password;
-  final bool? isAdmin;
+  final String? email;
+  final UserTypeEnum? type;
   final String? token;
 
-  UserModel({
-    this.id,
-    this.name,
-    this.pictureUrl,
-    this.userName,
-    this.password,
-    this.isAdmin = false,
-    this.token,
-  });
+  UserModel({this.id, this.name, this.email, this.type, this.token});
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

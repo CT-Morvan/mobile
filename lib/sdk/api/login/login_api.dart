@@ -1,15 +1,15 @@
-import 'package:ct_morvan_app/models/login/login_model.dart';
+import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/sdk/api/api.dart';
 
-class LoginApi extends Api<Map<String, dynamic>, LoginModel> {
+class LoginApi extends Api<Map<String, dynamic>, UserModel> {
   final String user;
   final String password;
 
   LoginApi({required this.user, required this.password});
 
   @override
-  LoginModel getResponseApi(Map<String, dynamic> data) {
-    final loginModel = LoginModel.fromJson(data);
+  UserModel getResponseApi(Map<String, dynamic> data) {
+    final loginModel = UserModel.fromJson(data);
 
     return loginModel;
   }

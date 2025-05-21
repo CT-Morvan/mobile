@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:ct_morvan_app/models/login/login_model.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/sdk/api/login/login_api.dart';
 import 'package:ct_morvan_app/sdk/shared_preferences_controller.dart';
@@ -19,13 +18,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       final response = await api.execute();
       switch (response) {
-        case Success<LoginModel, String>():
-          await SharedPreferencesController().saveLoggedUser(
-            UserModel(token: response.success.token),
-          );
+        case Success<UserModel, String>():
+          await SharedPreferencesController().saveLoggedUser(response.success);
 
-          emit(LoginSuccessState(token: response.success.token));
-        case Error<LoginModel, String>():
+          emit(LoginSuccessState(user: response.success));
+        case Error<UserModel, String>():
           emit(LoginErrorState(message: response.error));
       }
     });

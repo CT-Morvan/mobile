@@ -25,7 +25,7 @@ class UserImageWidget extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: primaryColor, width: borderWidth),
           ),
-          child: Icon(Icons.person_rounded, size: size / 2),
+          child: Icon(Icons.person_rounded, size: size / 2, color: grayColor),
         ),
         // CachedNetworkImage(
         //   imageUrl: "https://picsum.photos/200",

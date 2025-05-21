@@ -14,7 +14,7 @@ final class LoginErrorState extends LoginState {
 }
 
 final class LoginSuccessState extends LoginState {
-  final String token;
+  final UserModel user;
 
-  LoginSuccessState({required this.token});
+  LoginSuccessState({required this.user});
 }

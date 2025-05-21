@@ -7,3 +7,4 @@ const Color textColor = Color(0xFF000000);
 const Color steelColor = Color(0xFF818187);
 const Color whiteColor = Color(0xFFFFFFFF);
 const Color activeItem = Color(0xFF0057FF);
+const Color grayColor = Color(0xFF747474);
