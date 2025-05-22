@@ -4,7 +4,6 @@ import 'package:multiple_result/multiple_result.dart';
 
 abstract class Api<T, R> {
   Future<Result<R, String>> execute() async {
-    print("object");
     final response = await getSdk.executeApi<T>(this);
 
     switch (response) {

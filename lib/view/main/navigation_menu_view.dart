@@ -5,7 +5,7 @@ import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/main/bloc/navigation_menu_bloc.dart';
 import 'package:ct_morvan_app/view/tests/tests_view.dart';
-import 'package:ct_morvan_app/view/user/list_users_view.dart';
+import 'package:ct_morvan_app/view/user/list_users/list_users_view.dart';
 import 'package:ct_morvan_app/view/user/user_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

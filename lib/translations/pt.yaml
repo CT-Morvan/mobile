@@ -26,3 +26,5 @@ kg: kg
 storeTests: Criar testes
 bioimpedance: Bioimpedância
 genericError: Ocorreu um erro inesperado
+usersListEmpty: Sem usuários cadastrados
+tryAgain: Tentar novamente

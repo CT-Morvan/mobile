@@ -7,6 +7,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   final String text;
   final void Function() onPressed;
   final bool enabled;
+  final bool expanded;
 
   const PrimaryButtonWidget({
     super.key,
@@ -15,6 +16,7 @@ class PrimaryButtonWidget extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 16),
     this.backgroundColor = primaryColor,
     this.enabled = true,
+    this.expanded = true,
   });
 
   @override
@@ -22,26 +24,31 @@ class PrimaryButtonWidget extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: ElevatedButton(
-              onPressed:
-                  enabled
-                      ? () {
-                        onPressed();
-                      }
-                      : null,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: backgroundColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Text(text, style: TextStyle(color: whiteColor)),
-            ),
-          ),
+          if (expanded) ...[
+            Expanded(child: _getButton()),
+          ] else ...[
+            _getButton(),
+          ],
         ],
       ),
+    );
+  }
+
+  Widget _getButton() {
+    return ElevatedButton(
+      onPressed:
+          enabled
+              ? () {
+                onPressed();
+              }
+              : null,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      child: Text(text, style: TextStyle(color: whiteColor)),
     );
   }
 }

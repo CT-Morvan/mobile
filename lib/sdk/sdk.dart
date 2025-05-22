@@ -72,7 +72,7 @@ class Sdk {
   Future<Map<String, String>> getHeaders() async {
     final Map<String, String> req = Map.from(_dio.options.headers);
     final user = await SharedPreferencesController().getLoggedUser();
-    req.addAll({"Authorization": user?.token ?? ""});
+    req.addAll({"Authorization": "Bearer ${user?.token}"});
 
     return req;
   }
