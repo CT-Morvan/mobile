@@ -13,6 +13,7 @@ class AppTextFieldWidget extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
 
   const AppTextFieldWidget({
     super.key,
@@ -26,12 +27,14 @@ class AppTextFieldWidget extends StatelessWidget {
     this.suffixText,
     this.textInputType,
     this.inputFormatters,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       key: key,
+      validator: validator,
       controller: controller,
       maxLines: maxLines,
       decoration: InputDecoration(
@@ -41,7 +44,6 @@ class AppTextFieldWidget extends StatelessWidget {
         hintStyle: TextStyle(color: steelColor),
         prefixIcon: prefixIcon,
         suffixText: suffixText,
-        
       ),
       inputFormatters: inputFormatters,
       onChanged: onChanged,

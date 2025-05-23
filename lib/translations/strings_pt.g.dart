@@ -46,7 +46,6 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get nameHint => 'Nome Sobrenome';
 	String get password => 'Senha';
 	String get confirmPassword => 'Confirmar senha';
-	String get passwordRequirements => 'A senha precisa ter pelo menos 8 caracteres, sendo uma letra, um número, e um caractere especial';
 	String get passwordAreNotTheSame => 'As senhas não são iguais';
 	String get changePassword => 'Trocar senha';
 	String get logout => 'Logout';
@@ -69,6 +68,10 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get genericError => 'Ocorreu um erro inesperado';
 	String get usersListEmpty => 'Sem usuários cadastrados';
 	String get tryAgain => 'Tentar novamente';
+	String get requiredField => 'Campo obrigatório';
+	String get passwordRequirements => 'A senha deve possuir pelo menos 8 caracteres';
+	String get patient => 'Aluno';
+	String get admin => 'Administrador';
 }
 
 /// Flat map(s) containing all translations.
@@ -83,7 +86,6 @@ extension on Translations {
 			case 'nameHint': return 'Nome Sobrenome';
 			case 'password': return 'Senha';
 			case 'confirmPassword': return 'Confirmar senha';
-			case 'passwordRequirements': return 'A senha precisa ter pelo menos 8 caracteres, sendo uma letra, um número, e um caractere especial';
 			case 'passwordAreNotTheSame': return 'As senhas não são iguais';
 			case 'changePassword': return 'Trocar senha';
 			case 'logout': return 'Logout';
@@ -106,6 +108,10 @@ extension on Translations {
 			case 'genericError': return 'Ocorreu um erro inesperado';
 			case 'usersListEmpty': return 'Sem usuários cadastrados';
 			case 'tryAgain': return 'Tentar novamente';
+			case 'requiredField': return 'Campo obrigatório';
+			case 'passwordRequirements': return 'A senha deve possuir pelo menos 8 caracteres';
+			case 'patient': return 'Aluno';
+			case 'admin': return 'Administrador';
 			default: return null;
 		}
 	}

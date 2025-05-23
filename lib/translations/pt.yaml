@@ -5,7 +5,6 @@ name: Nome
 nameHint: Nome Sobrenome
 password: Senha
 confirmPassword: Confirmar senha
-passwordRequirements: A senha precisa ter pelo menos 8 caracteres, sendo uma letra, um número, e um caractere especial
 passwordAreNotTheSame: As senhas não são iguais
 changePassword: Trocar senha
 logout: Logout
@@ -28,3 +27,7 @@ bioimpedance: Bioimpedância
 genericError: Ocorreu um erro inesperado
 usersListEmpty: Sem usuários cadastrados
 tryAgain: Tentar novamente
+requiredField: Campo obrigatório
+passwordRequirements: A senha deve possuir pelo menos 8 caracteres
+patient: Aluno
+admin: Administrador

@@ -3,6 +3,8 @@ import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
+import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_item_widget.dart';
+import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_widget.dart';
 import 'package:ct_morvan_app/widget/user_image_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -21,88 +23,24 @@ class UserListItemWidget extends StatelessWidget {
           showModalBottomSheet<void>(
             context: context,
             builder: (BuildContext context) {
-              return Wrap(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Container(
-                            width: 48,
-                            height: 4,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            t.storeTests,
-                            style: TextStyle(
-                              color: textColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                            AutoRouter.of(
-                              context,
-                            ).push(MaximumRepFormViewRoute());
-                          },
-                          borderRadius: BorderRadius.circular(4),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Row(
-                              children: [
-                                Text(
-                                  t.maximumRepTest,
-                                  style: TextStyle(
-                                    color: textColor,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-
-                            //todo: alterar rota pra receber user id
-
-                            AutoRouter.of(
-                              context,
-                            ).push(MaximumRepFormViewRoute());
-                          },
-                          borderRadius: BorderRadius.circular(4),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Row(
-                              children: [
-                                Text(
-                                  t.bioimpedance,
-                                  style: TextStyle(
-                                    color: textColor,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 32),
-                      ],
-                    ),
+              return BottomSheetWidget(
+                title: t.storeTests,
+                itens: [
+                  BottomSheetItemWidget(
+                    text: t.maximumRepTest,
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      //todo: alterar rota pra receber user id
+                      AutoRouter.of(context).push(MaximumRepFormViewRoute());
+                    },
+                  ),
+                  BottomSheetItemWidget(
+                    text: t.bioimpedance,
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      //todo: alterar rota pra receber user id
+                      AutoRouter.of(context).push(MaximumRepFormViewRoute());
+                    },
                   ),
                 ],
               );
@@ -118,43 +56,69 @@ class UserListItemWidget extends StatelessWidget {
                 child: UserImageWidget(size: 54, borderWidth: 2),
               ),
               Expanded(
-                child: Text(
-                  user.name ?? "",
-                  style: TextStyle(fontSize: 16, color: textColor),
-                  overflow: TextOverflow.ellipsis,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      user.name ?? "",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                    Text(
+                      _getEmailAndType(),
+                      style: TextStyle(fontSize: 14, color: grayColor),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
               //todo: comentado visto não sabermos se será desenvolvido a deleção e edição de usuários
-              // IconButton(
-              //   onPressed: () {
-              //     showModalBottomSheet<void>(
-              //       context: context,
-              //       builder: (BuildContext context) {
-              //         return SizedBox(
-              //           height: 200,
-              //           child: Center(
-              //             child: Column(
-              //               mainAxisAlignment: MainAxisAlignment.center,
-              //               mainAxisSize: MainAxisSize.min,
-              //               children: <Widget>[
-              //                 const Text('Modal BottomSheet'),
-              //                 ElevatedButton(
-              //                   child: const Text('Close BottomSheet'),
-              //                   onPressed: () => Navigator.pop(context),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         );
-              //       },
-              //     );
-              //   },
-              //   icon: Icon(Icons.more_vert),
-              // ),
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BottomSheetWidget(
+                        title: t.storeTests,
+                        itens: [
+                          BottomSheetItemWidget(
+                            text: t.maximumRepTest,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              //todo: alterar rota pra receber user id
+                              AutoRouter.of(
+                                context,
+                              ).push(MaximumRepFormViewRoute());
+                            },
+                          ),
+                          BottomSheetItemWidget(
+                            text: t.bioimpedance,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              //todo: alterar rota pra receber user id
+                              AutoRouter.of(
+                                context,
+                              ).push(MaximumRepFormViewRoute());
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                icon: Icon(Icons.more_vert),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  String _getEmailAndType() {
+    final email = user.email ?? "";
+    final type = user.type.toString();
+
+    return "$email • $type";
   }
 }

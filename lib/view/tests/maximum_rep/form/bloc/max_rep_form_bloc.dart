@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_form_model.dart';
-import 'package:ct_morvan_app/sdk/api/max_rep/max_rep_get_form_api.dart';
+import 'package:ct_morvan_app/sdk/api/max_rep_get_form_api.dart';
 import 'package:meta/meta.dart';
 import 'package:multiple_result/src/result.dart';
 

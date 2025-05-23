@@ -27,9 +27,11 @@ class Sdk {
         (key, value) => value == null || (value is String && value.isEmpty),
       );
 
-      final body = api.getBody();
+      Object? body = api.getBody();
       if (body != null && body is Map<String, dynamic>) {
         body.removeWhere((key, value) => value == null || value == "");
+
+        body = FormData.fromMap(body);
       }
 
       if (api.isAuth) {
@@ -72,7 +74,10 @@ class Sdk {
   Future<Map<String, String>> getHeaders() async {
     final Map<String, String> req = Map.from(_dio.options.headers);
     final user = await SharedPreferencesController().getLoggedUser();
-    req.addAll({"Authorization": "Bearer ${user?.token}"});
+    req.addAll({
+      "Authorization": "Bearer ${user?.token}",
+      "application": "application/json",
+    });
 
     return req;
   }
