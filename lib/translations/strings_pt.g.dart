@@ -74,7 +74,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get admin => 'Administrador';
 	String get formSendSuccessfully => 'Teste salvo com sucesso';
 	String get maximumRepMinimum => 'As repetições precisam ser no mínimo 1';
-	String get maximumRepWorkloadMinimum => 'O peso usado precisa ser no mínimo 1 kg';
+	String get maximumRepWorkloadMinimum => 'A carga usada precisa ser no mínimo 1 kg';
+	String get invalidCredentials => 'Usuário ou senha incorretas';
 }
 
 /// Flat map(s) containing all translations.
@@ -117,7 +118,8 @@ extension on Translations {
 			case 'admin': return 'Administrador';
 			case 'formSendSuccessfully': return 'Teste salvo com sucesso';
 			case 'maximumRepMinimum': return 'As repetições precisam ser no mínimo 1';
-			case 'maximumRepWorkloadMinimum': return 'O peso usado precisa ser no mínimo 1 kg';
+			case 'maximumRepWorkloadMinimum': return 'A carga usada precisa ser no mínimo 1 kg';
+			case 'invalidCredentials': return 'Usuário ou senha incorretas';
 			default: return null;
 		}
 	}

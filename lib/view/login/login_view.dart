@@ -20,6 +20,7 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _bloc = LoginBloc();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -47,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
           if (state is LoginErrorState) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            ).showSnackBar(SnackBar(content: Text(t.invalidCredentials)));
           }
         },
         bloc: _bloc,
@@ -63,41 +64,58 @@ class _LoginViewState extends State<LoginView> {
             reverse: true,
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Image.asset(ctMorvanLogo),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: AppTextFieldWidget(
-                      controller: emailController,
-                      hint: t.emailHint,
-                      label: t.email,
-                      maxLines: 1,
-                      prefixIcon: Icon(Icons.mail_outline_rounded),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Image.asset(ctMorvanLogo),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: AppTextFieldWidget(
+                        controller: emailController,
+                        hint: t.emailHint,
+                        label: t.email,
+                        maxLines: 1,
+                        prefixIcon: Icon(Icons.mail_outline_rounded),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return t.requiredField;
+                          }
+                          return null;
+                        },
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: AppTextFieldWidget(
-                      controller: passwordController,
-                      label: t.password,
-                      maxLines: 1,
-                      obscureText: true,
-                      prefixIcon: Icon(Icons.password),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: AppTextFieldWidget(
+                        controller: passwordController,
+                        label: t.password,
+                        maxLines: 1,
+                        obscureText: true,
+                        prefixIcon: Icon(Icons.password),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return t.requiredField;
+                          }
+                          return null;
+                        },
+                      ),
                     ),
-                  ),
-                  PrimaryButtonWidget(
-                    onPressed: () {
-                      _bloc.add(
-                        LoginEvent(
-                          user: emailController.text,
-                          password: passwordController.text,
-                        ),
-                      );
-                    },
-                    text: t.access,
-                  ),
-                ],
+                    PrimaryButtonWidget(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _bloc.add(
+                            LoginEvent(
+                              user: emailController.text,
+                              password: passwordController.text,
+                            ),
+                          );
+                        }
+                      },
+                      text: t.access,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

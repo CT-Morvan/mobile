@@ -34,3 +34,4 @@ admin: Administrador
 formSendSuccessfully: Teste salvo com sucesso
 maximumRepMinimum: As repetições precisam ser no mínimo 1
 maximumRepWorkloadMinimum: A carga usada precisa ser no mínimo 1 kg
+invalidCredentials: Usuário ou senha incorretas
