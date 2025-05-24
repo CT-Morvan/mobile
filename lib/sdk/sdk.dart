@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_constants.dart';
+import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/sdk/api/api.dart';
 import 'package:ct_morvan_app/sdk/shared_preferences_controller.dart';
 import 'package:dio/dio.dart';
@@ -90,7 +91,7 @@ class Sdk {
     final result = await SharedPreferencesController().deleteUser();
 
     if (context.mounted) {
-      AutoRouter.of(context).popUntilRoot();
+      AutoRouter.of(context).replaceAll([LoginViewRoute()]);
     }
 
     return result;

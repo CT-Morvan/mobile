@@ -14,7 +14,7 @@ class SharedPreferencesController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userPref = prefs.getString('user');
 
-    if (userPref == null) {
+    if (userPref == null || userPref.isEmpty) {
       return null;
     }
 
