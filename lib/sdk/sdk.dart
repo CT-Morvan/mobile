@@ -31,7 +31,8 @@ class Sdk {
       if (body != null && body is Map<String, dynamic>) {
         body.removeWhere((key, value) => value == null || value == "");
 
-        body = FormData.fromMap(body);
+        body = FormData.fromMap(body, ListFormat.multiCompatible);
+        print(body);
       }
 
       if (api.isAuth) {
@@ -77,6 +78,7 @@ class Sdk {
     req.addAll({
       "Authorization": "Bearer ${user?.token}",
       "application": "application/json",
+      'Content-Type': 'multipart/form-data',
     });
 
     return req;

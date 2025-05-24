@@ -26,7 +26,7 @@ class _TestsViewState extends State<TestsView> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () {
-                  AutoRouter.of(context).push(MaximumRepFormViewRoute());
+                  AutoRouter.of(context).push(MaximumRepResultsViewRoute());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -52,7 +52,7 @@ class _TestsViewState extends State<TestsView> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () {
-                  AutoRouter.of(context).push(MaximumRepFormViewRoute());
+                  AutoRouter.of(context).push(MaximumRepResultsViewRoute());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),

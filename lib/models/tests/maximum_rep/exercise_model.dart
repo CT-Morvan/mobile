@@ -1,3 +1,4 @@
+import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_create_model.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -28,4 +29,13 @@ class ExerciseModel {
       _$ExerciseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ExerciseModelToJson(this);
+
+  MaxRepCreateModel toMaxRepCreateModel() {
+    return MaxRepCreateModel(
+      workload: workload,
+      exerciseId: id,
+      maxReps: maxRep,
+      date: DateTime.now(),
+    );
+  }
 }

@@ -30,16 +30,18 @@ class UserListItemWidget extends StatelessWidget {
                     text: t.maximumRepTest,
                     onTap: () {
                       Navigator.of(context).pop();
-                      //todo: alterar rota pra receber user id
-                      AutoRouter.of(context).push(MaximumRepFormViewRoute());
+                      AutoRouter.of(
+                        context,
+                      ).push(MaximumRepFormViewRoute(userId: user.id));
                     },
                   ),
                   BottomSheetItemWidget(
                     text: t.bioimpedance,
                     onTap: () {
                       Navigator.of(context).pop();
-                      //todo: alterar rota pra receber user id
-                      AutoRouter.of(context).push(MaximumRepFormViewRoute());
+                      AutoRouter.of(
+                        context,
+                      ).push(MaximumRepFormViewRoute(userId: user.id));
                     },
                   ),
                 ],
@@ -85,20 +87,18 @@ class UserListItemWidget extends StatelessWidget {
                             text: t.maximumRepTest,
                             onTap: () {
                               Navigator.of(context).pop();
-                              //todo: alterar rota pra receber user id
                               AutoRouter.of(
                                 context,
-                              ).push(MaximumRepFormViewRoute());
+                              ).push(MaximumRepFormViewRoute(userId: user.id));
                             },
                           ),
                           BottomSheetItemWidget(
                             text: t.bioimpedance,
                             onTap: () {
                               Navigator.of(context).pop();
-                              //todo: alterar rota pra receber user id
                               AutoRouter.of(
                                 context,
-                              ).push(MaximumRepFormViewRoute());
+                              ).push(MaximumRepFormViewRoute(userId: user.id));
                             },
                           ),
                         ],
