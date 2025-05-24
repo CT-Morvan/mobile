@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
+import 'package:ct_morvan_app/models/enum/user_type_enum.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
@@ -19,36 +20,39 @@ class UserListItemWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return BottomSheetWidget(
-                title: t.storeTests,
-                itens: [
-                  BottomSheetItemWidget(
-                    text: t.maximumRepTest,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      AutoRouter.of(
-                        context,
-                      ).push(MaximumRepFormViewRoute(userId: user.id));
+        onTap:
+            user.type == UserTypeEnum.admin
+                ? null
+                : () {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BottomSheetWidget(
+                        title: t.storeTests,
+                        itens: [
+                          BottomSheetItemWidget(
+                            text: t.maximumRepTest,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              AutoRouter.of(
+                                context,
+                              ).push(MaximumRepFormViewRoute(userId: user.id));
+                            },
+                          ),
+                          BottomSheetItemWidget(
+                            text: t.bioimpedance,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              AutoRouter.of(
+                                context,
+                              ).push(MaximumRepFormViewRoute(userId: user.id));
+                            },
+                          ),
+                        ],
+                      );
                     },
-                  ),
-                  BottomSheetItemWidget(
-                    text: t.bioimpedance,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      AutoRouter.of(
-                        context,
-                      ).push(MaximumRepFormViewRoute(userId: user.id));
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
+                  );
+                },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Row(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_constants.dart';
 import 'package:ct_morvan_app/sdk/api/api.dart';
@@ -31,7 +33,7 @@ class Sdk {
       if (body != null && body is Map<String, dynamic>) {
         body.removeWhere((key, value) => value == null || value == "");
 
-        body = FormData.fromMap(body, ListFormat.multiCompatible);
+        body = jsonEncode(body);
         print(body);
       }
 
@@ -78,7 +80,7 @@ class Sdk {
     req.addAll({
       "Authorization": "Bearer ${user?.token}",
       "application": "application/json",
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
     });
 
     return req;

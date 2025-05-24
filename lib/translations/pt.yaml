@@ -31,3 +31,6 @@ requiredField: Campo obrigatório
 passwordRequirements: A senha deve possuir pelo menos 8 caracteres
 patient: Aluno
 admin: Administrador
+formSendSuccessfully: Teste salvo com sucesso
+maximumRepMinimum: As repetições precisam ser no mínimo 1
+maximumRepWorkloadMinimum: A carga usada precisa ser no mínimo 1 kg

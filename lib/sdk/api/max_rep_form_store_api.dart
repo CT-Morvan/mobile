@@ -24,4 +24,9 @@ class MaxRepFormStoreApi extends Api<Map<String, dynamic>, MaxRepFormModel> {
   Object? getBody() {
     return {"user_id": userId, "maximums": maximums};
   }
+
+  @override
+  HttpMethod getMethod() {
+    return HttpMethod.post;
+  }
 }

@@ -21,6 +21,7 @@ class MaximumRepFormView extends StatefulWidget {
 
 class _MaximumRepFormViewState extends State<MaximumRepFormView> {
   final MaxRepFormBloc _bloc = MaxRepFormBloc();
+  final _formKey = GlobalKey<FormState>();
 
   List<ExerciseModel> items = [];
 
@@ -36,9 +37,11 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
       appBar: AppBar(title: Text(t.maximumRepTest)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _bloc.add(
-            MaxRepSendFormEvent(userId: widget.userId, exercises: items),
-          );
+          if (_formKey.currentState!.validate()) {
+            _bloc.add(
+              MaxRepSendFormEvent(userId: widget.userId, exercises: items),
+            );
+          }
         },
         child: Icon(Icons.check, color: whiteColor),
       ),
@@ -54,81 +57,108 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
               context,
             ).showSnackBar(SnackBar(content: Text(state.message)));
           }
+          if (state is MaxRepSendFormSuccessState) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(t.formSendSuccessfully)));
+            AutoRouter.of(context).pop();
+          }
         },
         bloc: _bloc,
         builder: (context, state) {
           if (state is MaxRepGetFormSuccessState) {
-            return ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index];
-                return Card(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.name ?? "",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: textColor,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppTextFieldWidget(
-                          label: t.maxReps,
-                          onChanged: (value) {
-                            setState(() {
-                              item.maxRep =
-                                  value.isNotEmpty ? int.parse(value) : 0;
-                            });
-                          },
-                          controller: item.maxRepController,
-                          textInputType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        AppTextFieldWidget(
-                          label: t.maxWorkload,
-                          onChanged: (value) {
-                            setState(() {
-                              item.workload =
-                                  value.isNotEmpty ? double.parse(value) : 0;
-                            });
-                          },
-                          controller: item.workloadController,
-                          suffixText: t.kg,
-                          textInputType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                        ),
-                      ],
+            return Form(
+              key: _formKey,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return Card(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
-                );
-              },
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.name ?? "",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          AppTextFieldWidget(
+                            label: t.maxReps,
+                            onChanged: (value) {
+                              setState(() {
+                                item.maxRep =
+                                    value.isNotEmpty ? int.parse(value) : 0;
+                              });
+                            },
+                            controller: item.maxRepController,
+                            textInputType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return t.requiredField;
+                              }
+                              if (int.parse(value) < 1) {
+                                return t.maximumRepMinimum;
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          AppTextFieldWidget(
+                            label: t.maxWorkload,
+                            onChanged: (value) {
+                              setState(() {
+                                item.workload =
+                                    value.isNotEmpty ? double.parse(value) : 0;
+                              });
+                            },
+                            controller: item.workloadController,
+                            suffixText: t.kg,
+                            textInputType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return t.requiredField;
+                              }
+                              if (double.parse(value) < 1) {
+                                return t.maximumRepWorkloadMinimum;
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             );
           }
 
           if (state is MaxRepGetFormErrorState) {
             return FullscreenMessageWidget(
-              title: state.message,
+              title: t.genericError,
               buttonText: t.tryAgain,
               buttonAction: () {
                 if (items.isEmpty) {

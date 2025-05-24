@@ -72,6 +72,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get passwordRequirements => 'A senha deve possuir pelo menos 8 caracteres';
 	String get patient => 'Aluno';
 	String get admin => 'Administrador';
+	String get formSendSuccessfully => 'Teste salvo com sucesso';
+	String get maximumRepMinimum => 'As repetições precisam ser no mínimo 1';
+	String get maximumRepWorkloadMinimum => 'O peso usado precisa ser no mínimo 1 kg';
 }
 
 /// Flat map(s) containing all translations.
@@ -112,6 +115,9 @@ extension on Translations {
 			case 'passwordRequirements': return 'A senha deve possuir pelo menos 8 caracteres';
 			case 'patient': return 'Aluno';
 			case 'admin': return 'Administrador';
+			case 'formSendSuccessfully': return 'Teste salvo com sucesso';
+			case 'maximumRepMinimum': return 'As repetições precisam ser no mínimo 1';
+			case 'maximumRepWorkloadMinimum': return 'O peso usado precisa ser no mínimo 1 kg';
 			default: return null;
 		}
 	}
