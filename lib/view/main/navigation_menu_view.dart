@@ -91,7 +91,7 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
               body: Center(
                 child: [
                   if (state.user.type == UserTypeEnum.patient) ...[
-                    TestsView(),
+                    TestsView(user: state.user),
                   ] else ...[
                     ListUsersView(),
                   ],

@@ -47,6 +47,7 @@ class _UserViewState extends State<UserView> {
             ),
           ),
           Expanded(child: SizedBox()),
+          //todo: validar se vai ser desenvolvido
           // PrimaryButtonWidget(
           //   onPressed: () {
           //     AutoRouter.of(context).push(ChangePasswordViewRoute());

@@ -5,6 +5,7 @@ part 'maximum_rep_model.g.dart';
 @JsonSerializable()
 class MaximumRepModel {
   final DateTime date;
+  @JsonKey(name: "one_rep_max")
   final double oneRepMax;
 
   const MaximumRepModel({required this.date, required this.oneRepMax});

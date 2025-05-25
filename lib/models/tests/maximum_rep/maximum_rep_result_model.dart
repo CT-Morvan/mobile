@@ -5,14 +5,14 @@ part 'maximum_rep_result_model.g.dart';
 
 @JsonSerializable()
 class MaximumRepResultModel {
-  final String? exerciseName;
-  final int? exerciseId;
-  final List<MaximumRepModel>? results;
+  final String? name;
+  final int? id;
+  final List<MaximumRepModel>? maximums;
 
   const MaximumRepResultModel({
-    required this.exerciseName,
-    required this.exerciseId,
-    required this.results,
+    required this.name,
+    required this.id,
+    required this.maximums,
   });
 
   factory MaximumRepResultModel.fromJson(Map<String, dynamic> json) =>
