@@ -78,7 +78,6 @@ class UserListItemWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              //todo: comentado visto não sabermos se será desenvolvido a deleção e edição de usuários
               IconButton(
                 onPressed: () {
                   showModalBottomSheet<void>(
@@ -88,16 +87,16 @@ class UserListItemWidget extends StatelessWidget {
                         title: t.storeTests,
                         itens: [
                           BottomSheetItemWidget(
-                            text: t.maximumRepTest,
+                            text: t.viewTestsTitle(name: t.maximumRepTest),
                             onTap: () {
                               Navigator.of(context).pop();
                               AutoRouter.of(
                                 context,
-                              ).push(MaximumRepFormViewRoute(userId: user.id));
+                              ).push(MaximumRepResultsViewRoute(user: user));
                             },
                           ),
                           BottomSheetItemWidget(
-                            text: t.bioimpedance,
+                            text: t.viewTestsTitle(name: t.bioimpedance),
                             onTap: () {
                               Navigator.of(context).pop();
                               AutoRouter.of(
