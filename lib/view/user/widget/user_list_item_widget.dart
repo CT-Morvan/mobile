@@ -43,9 +43,9 @@ class UserListItemWidget extends StatelessWidget {
                             text: t.bioimpedance,
                             onTap: () {
                               Navigator.of(context).pop();
-                              AutoRouter.of(
-                                context,
-                              ).push(MaximumRepFormViewRoute(userId: user.id));
+                              AutoRouter.of(context).push(
+                                BioimpedanceFormViewRoute(userId: user.id),
+                              );
                             },
                           ),
                         ],
@@ -101,7 +101,7 @@ class UserListItemWidget extends StatelessWidget {
                               Navigator.of(context).pop();
                               AutoRouter.of(
                                 context,
-                              ).push(MaximumRepFormViewRoute(userId: user.id));
+                              ).push(BioimpedanceResultViewRoute());
                             },
                           ),
                         ],

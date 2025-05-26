@@ -1,0 +1,227 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:ct_morvan_app/consts/app_colors.dart';
+import 'package:ct_morvan_app/models/tests/bioimpedance/bioimpedance_model.dart';
+import 'package:ct_morvan_app/translations/strings.g.dart';
+import 'package:ct_morvan_app/view/tests/bioimpedance/form/bloc/bioimpedance_form_bloc.dart';
+import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+@RoutePage(name: "BioimpedanceFormViewRoute")
+class BioimpedanceFormView extends StatefulWidget {
+  final int? userId;
+  const BioimpedanceFormView({required this.userId, super.key});
+
+  @override
+  State<BioimpedanceFormView> createState() => _BioimpedanceFormViewState();
+}
+
+class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
+  final imcController = TextEditingController();
+  final fatPercentageController = TextEditingController();
+  final musclePercentageController = TextEditingController();
+  final basalMetabolismController = TextEditingController();
+  final metabolicAgeController = TextEditingController();
+  final visceralFatController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  final BioimpedanceFormBloc _bloc = BioimpedanceFormBloc();
+
+  bool isLoading = false;
+
+  @override
+  void dispose() {
+    heightController.dispose();
+    weightController.dispose();
+    imcController.dispose();
+    fatPercentageController.dispose();
+    musclePercentageController.dispose();
+    basalMetabolismController.dispose();
+    metabolicAgeController.dispose();
+    visceralFatController.dispose();
+    super.dispose();
+  }
+
+  String? validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return t.requiredField;
+    }
+    if (int.parse(value) < 1) {
+      return t.minimumValue(value: 0);
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(t.maximumRepTest)),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: isLoading ? grayColor.withAlpha(90) : primaryColor,
+        onPressed:
+            isLoading
+                ? null
+                : () {
+                  if (_formKey.currentState!.validate()) {
+                    final bioimpedance = BioimpedanceModel(
+                      date: DateTime.now(),
+                      height: double.tryParse(heightController.text),
+                      weight: double.tryParse(weightController.text),
+                      imc: double.tryParse(imcController.text),
+                      fatPercentage: double.tryParse(
+                        fatPercentageController.text,
+                      ),
+                      musclePercentage: double.tryParse(
+                        musclePercentageController.text,
+                      ),
+                      basalMetabolism: int.tryParse(
+                        basalMetabolismController.text,
+                      ),
+                      metabolicAge: int.tryParse(metabolicAgeController.text),
+                      visceralFat: int.tryParse(visceralFatController.text),
+                    );
+
+                    setState(() {
+                      isLoading = true;
+                    });
+                    _bloc.add(
+                      BioimpedanceFormEvent(
+                        userId: widget.userId,
+                        bioimpedance: bioimpedance,
+                      ),
+                    );
+                  }
+                },
+        child: Icon(Icons.check, color: whiteColor),
+      ),
+      body: BlocConsumer<BioimpedanceFormBloc, BioimpedanceFormState>(
+        listener: (context, state) {
+          if (state is BioimpedanceFormStateSuccess) {
+            AutoRouter.of(context).pop();
+          }
+
+          if (state is BioimpedanceFormStateError) {
+            setState(() {
+              isLoading = false;
+            });
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+
+          if (state is BioimpedanceFormStateLoading) {
+            setState(() {
+              isLoading = true;
+            });
+          }
+        },
+        bloc: _bloc,
+        builder: (context, state) {
+          if (state is BioimpedanceFormStateLoading) {
+            return Center(
+              child: CircularProgressIndicator(color: primaryColor),
+            );
+          }
+
+          return SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              physics: BouncingScrollPhysics(),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    AppTextFieldWidget(
+                      label: t.height,
+                      controller: heightController,
+                      textInputType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      validator: validator,
+                      suffixText: t.cm,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: AppTextFieldWidget(
+                        label: t.weight,
+                        controller: weightController,
+                        textInputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        validator: validator,
+                        suffixText: t.kg,
+                      ),
+                    ),
+                    AppTextFieldWidget(
+                      label: t.imc,
+                      controller: imcController,
+                      textInputType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      validator: validator,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: AppTextFieldWidget(
+                        label: t.fatPercentage,
+                        controller: fatPercentageController,
+                        textInputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        validator: validator,
+                        suffixText: t.percentageSymbol,
+                      ),
+                    ),
+                    AppTextFieldWidget(
+                      label: t.musclePercentage,
+                      controller: musclePercentageController,
+                      textInputType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      validator: validator,
+                      suffixText: t.percentageSymbol,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: AppTextFieldWidget(
+                        label: t.basalMetabolism,
+                        controller: basalMetabolismController,
+                        textInputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        validator: validator,
+                      ),
+                    ),
+                    AppTextFieldWidget(
+                      label: t.metabolicAge,
+                      controller: metabolicAgeController,
+                      textInputType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      validator: validator,
+                      suffixText: t.years,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: AppTextFieldWidget(
+                        label: t.visceralFat,
+                        controller: visceralFatController,
+                        textInputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        validator: validator,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

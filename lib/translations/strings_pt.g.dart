@@ -77,6 +77,18 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get maximumRepWorkloadMinimum => 'A carga usada precisa ser no mínimo 1 kg';
 	String get invalidCredentials => 'Usuário ou senha incorretas';
 	String viewTestsTitle({required Object name}) => 'Visualizar teste ${name}';
+	String get height => 'Altura';
+	String get weight => 'Peso';
+	String get imc => 'IMC';
+	String get fatPercentage => 'Percentual de gordura';
+	String get musclePercentage => 'Percentual muscular';
+	String get basalMetabolism => 'Metabolismo basal';
+	String get metabolicAge => 'Idade metabólica';
+	String get visceralFat => 'Gordura visceral';
+	String get years => 'Anos';
+	String get percentageSymbol => '%';
+	String minimumValue({required Object value}) => 'O valor mínimo tem que ser maior que ${value}';
+	String get cm => 'cm';
 }
 
 /// Flat map(s) containing all translations.
@@ -122,6 +134,18 @@ extension on Translations {
 			case 'maximumRepWorkloadMinimum': return 'A carga usada precisa ser no mínimo 1 kg';
 			case 'invalidCredentials': return 'Usuário ou senha incorretas';
 			case 'viewTestsTitle': return ({required Object name}) => 'Visualizar teste ${name}';
+			case 'height': return 'Altura';
+			case 'weight': return 'Peso';
+			case 'imc': return 'IMC';
+			case 'fatPercentage': return 'Percentual de gordura';
+			case 'musclePercentage': return 'Percentual muscular';
+			case 'basalMetabolism': return 'Metabolismo basal';
+			case 'metabolicAge': return 'Idade metabólica';
+			case 'visceralFat': return 'Gordura visceral';
+			case 'years': return 'Anos';
+			case 'percentageSymbol': return '%';
+			case 'minimumValue': return ({required Object value}) => 'O valor mínimo tem que ser maior que ${value}';
+			case 'cm': return 'cm';
 			default: return null;
 		}
 	}

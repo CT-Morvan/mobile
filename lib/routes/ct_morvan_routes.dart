@@ -13,7 +13,7 @@ class CtMorvanRoutes extends RootStackRouter {
       page: NavigationMenuViewRoute.page,
       initial: true,
       children: [
-        AutoRoute(page: TestsViewRoute.page,),
+        AutoRoute(page: TestsViewRoute.page),
         AutoRoute(page: ListUsersViewRoute.page),
         AutoRoute(page: UserViewRoute.page),
       ],
@@ -28,5 +28,7 @@ class CtMorvanRoutes extends RootStackRouter {
     AutoRoute(page: CreateUserViewRoute.page),
     AutoRoute(page: ListUsersViewRoute.page),
     AutoRoute(page: UserViewRoute.page),
+    AutoRoute(page: BioimpedanceFormViewRoute.page),
+    AutoRoute(page: BioimpedanceResultViewRoute.page),
   ];
 }

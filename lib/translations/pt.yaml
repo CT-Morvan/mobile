@@ -36,3 +36,15 @@ maximumRepMinimum: As repetições precisam ser no mínimo 1
 maximumRepWorkloadMinimum: A carga usada precisa ser no mínimo 1 kg
 invalidCredentials: Usuário ou senha incorretas
 viewTestsTitle: Visualizar teste $name
+height: Altura
+weight: Peso
+imc: IMC
+fatPercentage: Percentual de gordura
+musclePercentage: Percentual muscular
+basalMetabolism: Metabolismo basal
+metabolicAge: Idade metabólica
+visceralFat: Gordura visceral
+years: Anos
+percentageSymbol: '%'
+minimumValue: O valor mínimo tem que ser maior que $value
+cm: cm

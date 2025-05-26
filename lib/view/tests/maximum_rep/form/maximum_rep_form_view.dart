@@ -32,6 +32,16 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
   }
 
   @override
+  void dispose() {
+    for (final item in items) {
+      item.maxRepController.dispose();
+      item.workloadController.dispose();
+    }
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(t.maximumRepTest)),
