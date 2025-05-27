@@ -101,7 +101,7 @@ class UserListItemWidget extends StatelessWidget {
                               Navigator.of(context).pop();
                               AutoRouter.of(
                                 context,
-                              ).push(BioimpedanceResultViewRoute());
+                              ).push(BioimpedanceResultViewRoute(user: user));
                             },
                           ),
                         ],

@@ -14,11 +14,11 @@ class BioimpedanceModel {
   @JsonKey(name: "muscle_percentage")
   final double? musclePercentage;
   @JsonKey(name: "basal_metabolism")
-  final int? basalMetabolism;
+  final double? basalMetabolism;
   @JsonKey(name: "metabolic_age")
-  final int? metabolicAge;
+  final double? metabolicAge;
   @JsonKey(name: "visceral_fat")
-  final int? visceralFat;
+  final double? visceralFat;
 
   BioimpedanceModel({
     required this.date,

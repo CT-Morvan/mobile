@@ -1,191 +1,158 @@
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/tests/bioimpedance/bioimpedance_model.dart';
+import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
+import 'package:ct_morvan_app/view/tests/bioimpedance/result/bloc/bioimpedance_result_bloc.dart';
+import 'package:ct_morvan_app/view/tests/bioimpedance/result/widget/bioimpedance_percentage_graphic_widget.dart';
+import 'package:ct_morvan_app/widget/fullscreen_message_widget.dart';
+import 'package:ct_morvan_app/widget/generic_chart_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:graphic/graphic.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage(name: "BioimpedanceResultViewRoute")
 class BioimpedanceResultView extends StatefulWidget {
-  const BioimpedanceResultView({Key? key}) : super(key: key);
+  final UserModel user;
+  const BioimpedanceResultView({required this.user, super.key});
 
   @override
   _BioimpedanceResultViewState createState() => _BioimpedanceResultViewState();
 }
 
 class _BioimpedanceResultViewState extends State<BioimpedanceResultView> {
-  final List<BioimpedanceModel> list = [
-    BioimpedanceModel(
-      date: DateTime(2019, 3, 29),
-      height: 173,
-      weight: 70,
-      imc: 26,
-      fatPercentage: 20,
-      musclePercentage: 20,
-      basalMetabolism: 1800,
-      metabolicAge: 40,
-      visceralFat: 6,
-    ),
-    BioimpedanceModel(
-      date: DateTime(2022, 3, 29),
-      height: 173,
-      weight: 80,
-      imc: 30,
-      fatPercentage: 20,
-      musclePercentage: 15,
-      basalMetabolism: 2000,
-      metabolicAge: 49,
-      visceralFat: 8,
-    ),
-    BioimpedanceModel(
-      date: DateTime.now(),
-      height: 173,
-      weight: 74,
-      imc: 26,
-      fatPercentage: 26,
-      musclePercentage: 30,
-      basalMetabolism: 1500,
-      metabolicAge: 29,
-      visceralFat: 6,
-    ),
-  ];
-  final lineMarkerData = [
-    {'day': 'Mon', 'value': 10, 'group': 'Highest'},
-    {'day': 'Tue', 'value': 11, 'group': 'Highest'},
-    {'day': 'Wed', 'value': 13, 'group': 'Highest'},
-    {'day': 'Thu', 'value': 11, 'group': 'Highest'},
-    {'day': 'Fri', 'value': 12, 'group': 'Highest'},
-    {'day': 'Sat', 'value': 12, 'group': 'Highest'},
-    {'day': 'Sun', 'value': 9, 'group': 'Highest'},
+  final _bloc = BioimpedanceResultBloc();
 
-    {'day': 'Mon', 'value': 1, 'group': 'Lowest'},
-    {'day': 'Tue', 'value': -2, 'group': 'Lowest'},
-    {'day': 'Wed', 'value': 2, 'group': 'Lowest'},
-    {'day': 'Thu', 'value': 5, 'group': 'Lowest'},
-    {'day': 'Fri', 'value': 3, 'group': 'Lowest'},
-    {'day': 'Sat', 'value': 2, 'group': 'Lowest'},
-    {'day': 'Sun', 'value': 0, 'group': 'Lowest'},
+  @override
+  void initState() {
+    _fetchData();
+    super.initState();
+  }
 
-    {'day': 'Mon', 'value': 2, 'group': 'Midwest'},
-    {'day': 'Tue', 'value': 3, 'group': 'Midwest'},
-    {'day': 'Wed', 'value': 5, 'group': 'Midwest'},
-    {'day': 'Thu', 'value': 2, 'group': 'Midwest'},
-    {'day': 'Fri', 'value': 1, 'group': 'Midwest'},
-    {'day': 'Sat', 'value': 4, 'group': 'Midwest'},
-    {'day': 'Sun', 'value': 7, 'group': 'Midwest'},
-  ];
+  void _fetchData() {
+    _bloc.add(BioimpedanceResultEvent(userId: widget.user.id));
+  }
+
+  List<GenericChartModel> createSerie(Map<DateTime, double> series) {
+    final List<GenericChartModel> newSerie = [];
+
+    for (final serie in series.entries) {
+      newSerie.add(GenericChartModel(date: serie.key, value: serie.value));
+    }
+
+    return newSerie;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(t.maximumRepTest)),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                width: 350,
-                height: 300,
-                child: Chart(
-                  data: lineMarkerData,
-                  variables: {
-                    'day': Variable(
-                      accessor: (Map datum) => datum['day'] as String,
-                      scale: OrdinalScale(inflate: true),
-                    ),
-                    'value': Variable(
-                      accessor: (Map datum) => datum['value'] as num,
-                      scale: LinearScale(
-                        max: 15,
-                        min: -3,
-                        tickCount: 7,
-                        formatter: (v) => '${v.toInt()} ℃',
-                      ),
-                    ),
-                    'group': Variable(
-                      accessor: (Map datum) => datum['group'] as String,
-                    ),
+      appBar: AppBar(title: Text("${t.bioimpedance} - ${widget.user.name}")),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: BlocConsumer<BioimpedanceResultBloc, BioimpedanceResultState>(
+          listener: (context, state) {
+            if (state is BioimpedanceResultStateError) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          },
+          bloc: _bloc,
+          builder: (context, state) {
+            if (state is BioimpedanceResultStateSuccess) {
+              if (state.list.isEmpty) {
+                return FullscreenMessageWidget(
+                  title: t.usersListEmpty,
+                  buttonText: t.createUser,
+                  buttonAction: () {
+                    _fetchData();
                   },
-                  coord: RectCoord(horizontalRange: [0.01, 0.99]),
-                  marks: [
-                    LineMark(
-                      position:
-                          Varset('day') * Varset('value') / Varset('group'),
-                      size: SizeEncode(value: 1),
-                      color: ColorEncode(
-                        variable: 'group',
-                        values: [
-                          const Color(0xff5470c6),
-                          const Color(0xff91cc75),
-                          const Color.fromARGB(255, 225, 243, 66),
-                        ],
-                      ),
-                      selected: {
-                        'touchMove': {1},
-                      },
-                    ),
-                    PointMark(
-                      color: ColorEncode(
-                        variable: 'group',
-                        values: [
-                          const Color(0xff5470c6),
-                          const Color(0xff91cc75),
-                          const Color.fromARGB(255, 225, 243, 66),
-                        ],
-                        updaters: {
-                          'groupMouse': {
-                            false: (color) => color.withAlpha(100),
-                          },
-                          'groupTouch': {
-                            false: (color) => color.withAlpha(100),
-                          },
-                        },
+                );
+              }
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    BioimpedancePercentageGraphicWidget(list: state.list),
+                    GenericChartWidget(
+                      title: t.weight,
+                      label: t.weight,
+                      unit: t.kg,
+                      series: createSerie(
+                        Map.fromEntries(
+                          state.list.map(
+                            (value) => MapEntry(value.date!, value.weight!),
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                  axes: [Defaults.horizontalAxis, Defaults.verticalAxis],
-                  selections: {
-                    'touchMove': PointSelection(
-                      variable: 'day',
-                      on: {
-                        GestureType.scaleUpdate,
-                        GestureType.tapDown,
-                        GestureType.longPressMoveUpdate,
-                      },
-                      dim: Dim.x,
-                    ),
-                  },
-                  tooltip: TooltipGuide(
-                    followPointer: [false, true],
-                    align: Alignment.topLeft,
-                    variables: ['group', 'value'],
-                    offset: const Offset(-20, -20),
-                  ),
-                  crosshair: CrosshairGuide(followPointer: [false, true]),
-                  annotations: [
-                    LineAnnotation(
-                      dim: Dim.y,
-                      value: 11.14,
-                      style: PaintStyle(
-                        strokeColor: const Color(0xff5470c6).withAlpha(100),
-                        dash: [2],
+                    GenericChartWidget(
+                      title: t.basalMetabolism,
+                      label: t.basalMetabolism,
+                      series: createSerie(
+                        Map.fromEntries(
+                          state.list.map(
+                            (value) =>
+                                MapEntry(value.date!, value.basalMetabolism!),
+                          ),
+                        ),
                       ),
                     ),
-                    LineAnnotation(
-                      dim: Dim.y,
-                      value: 1.57,
-                      style: PaintStyle(
-                        strokeColor: const Color(0xff91cc75).withAlpha(100),
-                        dash: [2],
+                    GenericChartWidget(
+                      title: t.metabolicAge,
+                      label: t.metabolicAge,
+                      unit: t.years,
+                      series: createSerie(
+                        Map.fromEntries(
+                          state.list.map(
+                            (value) =>
+                                MapEntry(value.date!, value.metabolicAge!),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GenericChartWidget(
+                      title: t.visceralFat,
+                      label: t.visceralFat,
+                      series: createSerie(
+                        Map.fromEntries(
+                          state.list.map(
+                            (value) =>
+                                MapEntry(value.date!, value.visceralFat!),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GenericChartWidget(
+                      title: t.imc,
+                      label: t.imc,
+                      series: createSerie(
+                        Map.fromEntries(
+                          state.list.map(
+                            (value) => MapEntry(value.date!, value.imc!),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
+              );
+            }
+
+            if (state is BioimpedanceResultStateError) {
+              return FullscreenMessageWidget(
+                title: t.genericError,
+                buttonText: t.tryAgain,
+                buttonAction: () {
+                  _fetchData();
+                },
+              );
+            }
+
+            return Center(
+              child: CircularProgressIndicator(color: primaryColor),
+            );
+          },
         ),
       ),
     );

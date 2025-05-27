@@ -3,7 +3,7 @@ import 'package:ct_morvan_app/sdk/api/api.dart';
 
 class BioimpedanceListApi
     extends Api<Map<String, dynamic>, List<BioimpedanceModel>> {
-  final int userId;
+  final int? userId;
   BioimpedanceListApi({required this.userId});
 
   @override

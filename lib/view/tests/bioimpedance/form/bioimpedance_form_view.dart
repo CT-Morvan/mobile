@@ -77,11 +77,13 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                       musclePercentage: double.tryParse(
                         musclePercentageController.text,
                       ),
-                      basalMetabolism: int.tryParse(
+                      basalMetabolism: double.tryParse(
                         basalMetabolismController.text,
                       ),
-                      metabolicAge: int.tryParse(metabolicAgeController.text),
-                      visceralFat: int.tryParse(visceralFatController.text),
+                      metabolicAge: double.tryParse(
+                        metabolicAgeController.text,
+                      ),
+                      visceralFat: double.tryParse(visceralFatController.text),
                     );
 
                     setState(() {

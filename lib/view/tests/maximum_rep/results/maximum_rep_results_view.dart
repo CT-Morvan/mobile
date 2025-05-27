@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/models/tests/maximum_rep/maximum_rep_model.dart';
-import 'package:ct_morvan_app/models/tests/maximum_rep/maximum_rep_result_model.dart';
 import 'package:ct_morvan_app/view/tests/maximum_rep/results/bloc/max_rep_result_bloc.dart';
 import 'package:ct_morvan_app/view/tests/maximum_rep/widget/maximum_rep_chart_widget.dart';
 import 'package:ct_morvan_app/widget/fullscreen_message_widget.dart';
