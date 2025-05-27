@@ -70,8 +70,14 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get tryAgain => 'Tentar novamente';
 	String get requiredField => 'Campo obrigatório';
 	String get passwordRequirements => 'A senha deve possuir pelo menos 8 caracteres';
-	String get patient => 'Aluno';
-	String get admin => 'Administrador';
+	String patient({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('pt'))(n,
+		one: 'Aluno',
+		other: 'Alunos',
+	);
+	String admin({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('pt'))(n,
+		one: 'Administrador',
+		other: 'Administradores',
+	);
 	String get formSendSuccessfully => 'Teste salvo com sucesso';
 	String get maximumRepMinimum => 'As repetições precisam ser no mínimo 1';
 	String get maximumRepWorkloadMinimum => 'A carga usada precisa ser no mínimo 1 kg';
@@ -89,6 +95,13 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get percentageSymbol => '%';
 	String minimumValue({required Object value}) => 'O valor mínimo tem que ser maior que ${value}';
 	String get cm => 'cm';
+	String get actions => 'Ações';
+	String get delete => 'Excluir';
+	String get edit => 'Editar';
+	String get patientsListEmpty => 'Sem alunos cadastrados';
+	String get createPatient => 'Criar aluno';
+	String get adminListEmpty => 'Sem administradores cadastrados';
+	String get createAdmin => 'Criar administrador';
 }
 
 /// Flat map(s) containing all translations.
@@ -127,8 +140,14 @@ extension on Translations {
 			case 'tryAgain': return 'Tentar novamente';
 			case 'requiredField': return 'Campo obrigatório';
 			case 'passwordRequirements': return 'A senha deve possuir pelo menos 8 caracteres';
-			case 'patient': return 'Aluno';
-			case 'admin': return 'Administrador';
+			case 'patient': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('pt'))(n,
+				one: 'Aluno',
+				other: 'Alunos',
+			);
+			case 'admin': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('pt'))(n,
+				one: 'Administrador',
+				other: 'Administradores',
+			);
 			case 'formSendSuccessfully': return 'Teste salvo com sucesso';
 			case 'maximumRepMinimum': return 'As repetições precisam ser no mínimo 1';
 			case 'maximumRepWorkloadMinimum': return 'A carga usada precisa ser no mínimo 1 kg';
@@ -146,6 +165,13 @@ extension on Translations {
 			case 'percentageSymbol': return '%';
 			case 'minimumValue': return ({required Object value}) => 'O valor mínimo tem que ser maior que ${value}';
 			case 'cm': return 'cm';
+			case 'actions': return 'Ações';
+			case 'delete': return 'Excluir';
+			case 'edit': return 'Editar';
+			case 'patientsListEmpty': return 'Sem alunos cadastrados';
+			case 'createPatient': return 'Criar aluno';
+			case 'adminListEmpty': return 'Sem administradores cadastrados';
+			case 'createAdmin': return 'Criar administrador';
 			default: return null;
 		}
 	}

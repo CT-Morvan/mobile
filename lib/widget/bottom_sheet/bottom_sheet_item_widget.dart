@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class BottomSheetItemWidget extends StatelessWidget {
   final String text;
+  final IconData icon;
   final void Function() onTap;
 
   const BottomSheetItemWidget({
     required this.text,
     required this.onTap,
+    required this.icon,
     super.key,
   });
 
@@ -22,7 +24,14 @@ class BottomSheetItemWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
-            Text(text, style: TextStyle(color: textColor, fontSize: 14)),
+            Icon(icon, color: steelColor),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                text,
+                style: TextStyle(color: textColor, fontSize: 14),
+              ),
+            ),
           ],
         ),
       ),

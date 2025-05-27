@@ -8,9 +8,9 @@ enum UserTypeEnum {
   String toString() {
     switch (this) {
       case UserTypeEnum.admin:
-        return t.admin;
+        return t.admin(n: 1);
       case UserTypeEnum.patient:
-        return t.patient;
+        return t.patient(n: 1);
     }
   }
 }

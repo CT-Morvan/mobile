@@ -44,6 +44,12 @@ class MyApp extends StatelessWidget {
           ),
           iconTheme: IconThemeData(color: Colors.white),
         ),
+        tabBarTheme: TabBarThemeData(
+          indicatorColor: primaryColor,
+          labelColor: primaryColor,
+          unselectedLabelColor: textColor,
+          overlayColor: WidgetStateProperty.all(primaryColor.withAlpha(10)),
+        ),
         inputDecorationTheme: InputDecorationTheme(
           activeIndicatorBorder: BorderSide(color: primaryColor),
           focusColor: primaryColor,

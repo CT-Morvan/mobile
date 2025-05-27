@@ -29,8 +29,12 @@ usersListEmpty: Sem usuários cadastrados
 tryAgain: Tentar novamente
 requiredField: Campo obrigatório
 passwordRequirements: A senha deve possuir pelo menos 8 caracteres
-patient: Aluno
-admin: Administrador
+patient:
+  one: Aluno
+  other: Alunos
+admin: 
+  one: Administrador
+  other: Administradores
 formSendSuccessfully: Teste salvo com sucesso
 maximumRepMinimum: As repetições precisam ser no mínimo 1
 maximumRepWorkloadMinimum: A carga usada precisa ser no mínimo 1 kg
@@ -48,3 +52,10 @@ years: Anos
 percentageSymbol: '%'
 minimumValue: O valor mínimo tem que ser maior que $value
 cm: cm
+actions: Ações
+delete: Excluir
+edit: Editar
+patientsListEmpty: Sem alunos cadastrados
+createPatient: Criar aluno
+adminListEmpty: Sem administradores cadastrados
+createAdmin: Criar administrador

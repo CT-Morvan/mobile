@@ -31,6 +31,7 @@ class UserListItemWidget extends StatelessWidget {
                         title: t.storeTests,
                         itens: [
                           BottomSheetItemWidget(
+                            icon: Icons.show_chart,
                             text: t.maximumRepTest,
                             onTap: () {
                               Navigator.of(context).pop();
@@ -40,6 +41,7 @@ class UserListItemWidget extends StatelessWidget {
                             },
                           ),
                           BottomSheetItemWidget(
+                            icon: Icons.show_chart,
                             text: t.bioimpedance,
                             onTap: () {
                               Navigator.of(context).pop();
@@ -71,7 +73,7 @@ class UserListItemWidget extends StatelessWidget {
                       style: TextStyle(fontSize: 16, color: textColor),
                     ),
                     Text(
-                      _getEmailAndType(),
+                      user.email ?? "",
                       style: TextStyle(fontSize: 14, color: grayColor),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -84,9 +86,24 @@ class UserListItemWidget extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return BottomSheetWidget(
-                        title: t.storeTests,
+                        title: t.actions,
                         itens: [
                           BottomSheetItemWidget(
+                            icon: Icons.delete,
+                            text: t.delete,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          BottomSheetItemWidget(
+                            icon: Icons.edit,
+                            text: t.edit,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          BottomSheetItemWidget(
+                            icon: Icons.show_chart,
                             text: t.viewTestsTitle(name: t.maximumRepTest),
                             onTap: () {
                               Navigator.of(context).pop();
@@ -96,6 +113,7 @@ class UserListItemWidget extends StatelessWidget {
                             },
                           ),
                           BottomSheetItemWidget(
+                            icon: Icons.show_chart,
                             text: t.viewTestsTitle(name: t.bioimpedance),
                             onTap: () {
                               Navigator.of(context).pop();
@@ -116,12 +134,5 @@ class UserListItemWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getEmailAndType() {
-    final email = user.email ?? "";
-    final type = user.type.toString();
-
-    return "$email • $type";
   }
 }

@@ -56,15 +56,6 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
                   appBar: AppBar(
                     title: Text(t.ctMorvan),
                     automaticallyImplyLeading: false,
-                    actions: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.help_outline_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
                   ),
                   bottomNavigationBar: Padding(
                     padding: const EdgeInsets.only(top: 8),
