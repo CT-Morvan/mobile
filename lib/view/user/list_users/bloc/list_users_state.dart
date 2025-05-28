@@ -18,3 +18,13 @@ final class ListUsersStateSuccess extends ListUsersState {
 
   ListUsersStateSuccess({required this.list});
 }
+
+final class DeleteUserStateLoading extends ListUsersState {}
+
+final class DeleteUserStateError extends ListUsersState {
+  final String message;
+
+  DeleteUserStateError({required this.message});
+}
+
+final class DeleteUserStateSuccess extends ListUsersState {}

@@ -1,17 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/models/enum/user_type_enum.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
-import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
-import 'package:ct_morvan_app/translations/strings.g.dart';
-import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_item_widget.dart';
-import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_widget.dart';
 import 'package:ct_morvan_app/widget/user_image_widget.dart';
 import 'package:flutter/material.dart';
 
 class UserListItemWidget extends StatelessWidget {
   final UserModel user;
-  const UserListItemWidget({super.key, required this.user});
+  final void Function()? mainOnTap;
+  final void Function() secondaryOnTap;
+
+  const UserListItemWidget({
+    super.key,
+    required this.user,
+    required this.secondaryOnTap,
+    required this.mainOnTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,41 +22,7 @@ class UserListItemWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap:
-            user.type == UserTypeEnum.admin
-                ? null
-                : () {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return BottomSheetWidget(
-                        title: t.storeTests,
-                        itens: [
-                          BottomSheetItemWidget(
-                            icon: Icons.show_chart,
-                            text: t.maximumRepTest,
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              AutoRouter.of(
-                                context,
-                              ).push(MaximumRepFormViewRoute(userId: user.id));
-                            },
-                          ),
-                          BottomSheetItemWidget(
-                            icon: Icons.show_chart,
-                            text: t.bioimpedance,
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              AutoRouter.of(context).push(
-                                BioimpedanceFormViewRoute(userId: user.id),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
+        onTap: mainOnTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Row(
@@ -81,52 +49,7 @@ class UserListItemWidget extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return BottomSheetWidget(
-                        title: t.actions,
-                        itens: [
-                          BottomSheetItemWidget(
-                            icon: Icons.delete,
-                            text: t.delete,
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          BottomSheetItemWidget(
-                            icon: Icons.edit,
-                            text: t.edit,
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          BottomSheetItemWidget(
-                            icon: Icons.show_chart,
-                            text: t.viewTestsTitle(name: t.maximumRepTest),
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              AutoRouter.of(
-                                context,
-                              ).push(MaximumRepResultsViewRoute(user: user));
-                            },
-                          ),
-                          BottomSheetItemWidget(
-                            icon: Icons.show_chart,
-                            text: t.viewTestsTitle(name: t.bioimpedance),
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              AutoRouter.of(
-                                context,
-                              ).push(BioimpedanceResultViewRoute(user: user));
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
+                onPressed: secondaryOnTap,
                 icon: Icon(Icons.more_vert),
               ),
             ],

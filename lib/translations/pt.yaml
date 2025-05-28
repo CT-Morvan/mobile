@@ -59,3 +59,9 @@ patientsListEmpty: Sem alunos cadastrados
 createPatient: Criar aluno
 adminListEmpty: Sem administradores cadastrados
 createAdmin: Criar administrador
+deleteUserTitle: Excluir usuário?
+deleteUserDescription: Você tem certeza que deseja excluir esse usuário? Ao excluir um usuário, todos os testes vinculados serão excluídos também.\nEssa ação é irreversível!
+cancel: Cancelar
+pleaseWait: Por favor aguarde
+deleteUserError: Ocorreu um erro ao excluir o usuário
+deleteUserSuccess: Usuário excluído com sucesso

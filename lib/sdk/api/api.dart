@@ -40,4 +40,4 @@ abstract class Api<T, R> {
   }
 }
 
-enum HttpMethod { get, post }
+enum HttpMethod { get, post, delete }

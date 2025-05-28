@@ -56,6 +56,12 @@ class Sdk {
             data: body,
             queryParameters: parameters,
           );
+        case HttpMethod.delete:
+          response = await _dio.delete<T>(
+            api.getUrl(),
+            data: body,
+            queryParameters: parameters,
+          );
       }
 
       if (response.data is T) {
