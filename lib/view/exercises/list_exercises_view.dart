@@ -4,6 +4,7 @@ import 'package:ct_morvan_app/models/exercises/exercise_model.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/exercises/bloc/list_exercises_bloc.dart';
+import 'package:ct_morvan_app/view/exercises/widget/dialog_create_exercise.dart';
 import 'package:ct_morvan_app/view/exercises/widget/exercise_list_item_widget.dart';
 import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_item_widget.dart';
 import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_widget.dart';
@@ -44,12 +45,27 @@ class _ListExercisesViewState extends State<ListExercisesView> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(t.deleteExerciseError)));
+            fetchData();
           }
           if (state is DeleteExerciseStateSuccess) {
             Navigator.of(context).pop();
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(t.deleteExerciseSuccess)));
+            fetchData();
+          }
+          if (state is CreateExerciseStateError) {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(t.createExerciseError)));
+            fetchData();
+          }
+          if (state is CreateExerciseStateSuccess) {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(t.createExerciseSuccess)));
             fetchData();
           }
         },
@@ -96,6 +112,7 @@ class _ListExercisesViewState extends State<ListExercisesView> {
                                       primaryButtonFunction: () {
                                         showDialog(
                                           context: context,
+                                          barrierDismissible: false,
                                           builder: (BuildContext context) {
                                             return GenericLoadingDialog();
                                           },
@@ -143,9 +160,23 @@ class _ListExercisesViewState extends State<ListExercisesView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          AutoRouter.of(context).push(CreateUserViewRoute()).then((_) {
-            fetchData();
-          });
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return DialogCreateExercise(
+                createFunction: (String name) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return GenericLoadingDialog();
+                    },
+                  );
+                  _bloc.add(CreateExerciseEvent(exerciseName: name));
+                },
+              );
+            },
+          );
         },
         child: Icon(Icons.add, color: Colors.white),
       ),

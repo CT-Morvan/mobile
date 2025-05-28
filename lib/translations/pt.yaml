@@ -66,8 +66,14 @@ deleteUserDescription: Você tem certeza que deseja excluir esse usuário? Ao ex
 pleaseWait: Por favor aguarde
 deleteUserError: Ocorreu um erro ao excluir o usuário
 deleteUserSuccess: Usuário excluído com sucesso
-exercises: Exercícios
+exercise: 
+  one: Exercício
+  other: Exercícios
 deleteExerciseTitle: Excluir exercício?
 deleteExerciseDescription: Você tem certeza que deseja excluir esse exercício? Ao excluir um exercício, todo o histórico desse exercício nos resultados serão excluídos também.\nEssa ação é irreversível!
 deleteExerciseError: Ocorreu um erro ao excluir o exercício
 deleteExerciseSuccess: Exercício excluído com sucesso
+createExercise: Criar exercício
+createExerciseSuccess: Exercício criado com sucesso
+createExerciseError: Ocorreu um erro ao criar o exercício
+save: Salvar

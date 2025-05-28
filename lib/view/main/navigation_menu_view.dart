@@ -75,7 +75,7 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
                           ),
                           BottomNavigationBarItem(
                             icon: Icon(Icons.fitness_center),
-                            label: t.exercises,
+                            label: t.exercise(n: 2),
                           ),
                         ],
                         BottomNavigationBarItem(

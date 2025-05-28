@@ -109,11 +109,18 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get pleaseWait => 'Por favor aguarde';
 	String get deleteUserError => 'Ocorreu um erro ao excluir o usuário';
 	String get deleteUserSuccess => 'Usuário excluído com sucesso';
-	String get exercises => 'Exercícios';
+	String exercise({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('pt'))(n,
+		one: 'Exercício',
+		other: 'Exercícios',
+	);
 	String get deleteExerciseTitle => 'Excluir exercício?';
 	String get deleteExerciseDescription => 'Você tem certeza que deseja excluir esse exercício? Ao excluir um exercício, todo o histórico desse exercício nos resultados serão excluídos também.\nEssa ação é irreversível!';
 	String get deleteExerciseError => 'Ocorreu um erro ao excluir o exercício';
 	String get deleteExerciseSuccess => 'Exercício excluído com sucesso';
+	String get createExercise => 'Criar exercício';
+	String get createExerciseSuccess => 'Exercício criado com sucesso';
+	String get createExerciseError => 'Ocorreu um erro ao criar o exercício';
+	String get save => 'Salvar';
 }
 
 /// Flat map(s) containing all translations.
@@ -191,11 +198,18 @@ extension on Translations {
 			case 'pleaseWait': return 'Por favor aguarde';
 			case 'deleteUserError': return 'Ocorreu um erro ao excluir o usuário';
 			case 'deleteUserSuccess': return 'Usuário excluído com sucesso';
-			case 'exercises': return 'Exercícios';
+			case 'exercise': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('pt'))(n,
+				one: 'Exercício',
+				other: 'Exercícios',
+			);
 			case 'deleteExerciseTitle': return 'Excluir exercício?';
 			case 'deleteExerciseDescription': return 'Você tem certeza que deseja excluir esse exercício? Ao excluir um exercício, todo o histórico desse exercício nos resultados serão excluídos também.\nEssa ação é irreversível!';
 			case 'deleteExerciseError': return 'Ocorreu um erro ao excluir o exercício';
 			case 'deleteExerciseSuccess': return 'Exercício excluído com sucesso';
+			case 'createExercise': return 'Criar exercício';
+			case 'createExerciseSuccess': return 'Exercício criado com sucesso';
+			case 'createExerciseError': return 'Ocorreu um erro ao criar o exercício';
+			case 'save': return 'Salvar';
 			default: return null;
 		}
 	}

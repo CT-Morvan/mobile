@@ -12,3 +12,9 @@ final class ListExercisesDeleteEvent extends ListExercisesEvent {
 
   const ListExercisesDeleteEvent({required this.exerciseId});
 }
+
+final class CreateExerciseEvent extends ListExercisesEvent {
+  final String exerciseName;
+
+  const CreateExerciseEvent({required this.exerciseName});
+}

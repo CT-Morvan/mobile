@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ct_morvan_app/models/exercises/exercise_model.dart';
 import 'package:ct_morvan_app/models/generic_message.dart';
+import 'package:ct_morvan_app/sdk/api/exercises/create_exercise_api.dart';
 import 'package:ct_morvan_app/sdk/api/exercises/delete_exercise_api.dart';
 import 'package:ct_morvan_app/sdk/api/exercises/list_exercises_api.dart';
 import 'package:meta/meta.dart';
@@ -37,6 +38,20 @@ class ListExercisesBloc extends Bloc<ListExercisesEvent, ListExercisesState> {
           emit(DeleteExerciseStateSuccess());
         case Error<GenericMessage, String>():
           emit(DeleteExerciseStateError(message: response.error));
+      }
+    });
+    on<CreateExerciseEvent>((event, emit) async {
+      emit(CreateExerciseStateLoading());
+
+      final api = CreateExercisesApi(exerciseName: event.exerciseName);
+
+      final response = await api.execute();
+
+      switch (response) {
+        case Success<ExerciseModel?, String>():
+          emit(CreateExerciseStateSuccess());
+        case Error<ExerciseModel?, String>():
+          emit(CreateExerciseStateError(message: response.error));
       }
     });
   }

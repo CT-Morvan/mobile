@@ -28,3 +28,13 @@ final class DeleteExerciseStateError extends ListExercisesState {
 }
 
 final class DeleteExerciseStateSuccess extends ListExercisesState {}
+
+final class CreateExerciseStateLoading extends ListExercisesState {}
+
+final class CreateExerciseStateError extends ListExercisesState {
+  final String message;
+
+  CreateExerciseStateError({required this.message});
+}
+
+final class CreateExerciseStateSuccess extends ListExercisesState {}

@@ -193,6 +193,7 @@ class _ListUsersViewState extends State<ListUsersView> {
                                 primaryButtonFunction: () {
                                   showDialog(
                                     context: context,
+                                    barrierDismissible: false,
                                     builder: (BuildContext context) {
                                       return GenericLoadingDialog();
                                     },
