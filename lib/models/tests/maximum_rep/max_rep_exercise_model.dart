@@ -2,10 +2,10 @@ import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_create_model.dart
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'exercise_model.g.dart';
+part 'max_rep_exercise_model.g.dart';
 
 @JsonSerializable()
-class ExerciseModel {
+class MaxRepExerciseModel {
   final String? name;
   final int? id;
   @JsonKey(defaultValue: 0)
@@ -18,17 +18,17 @@ class ExerciseModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   final TextEditingController workloadController = TextEditingController();
 
-  ExerciseModel({
+  MaxRepExerciseModel({
     required this.name,
     required this.id,
     required this.maxRep,
     required this.workload,
   });
 
-  factory ExerciseModel.fromJson(Map<String, dynamic> json) =>
-      _$ExerciseModelFromJson(json);
+  factory MaxRepExerciseModel.fromJson(Map<String, dynamic> json) =>
+      _$MaxRepExerciseModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ExerciseModelToJson(this);
+  Map<String, dynamic> toJson() => _$MaxRepExerciseModelToJson(this);
 
   MaxRepCreateModel toMaxRepCreateModel() {
     return MaxRepCreateModel(

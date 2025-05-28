@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/models/tests/maximum_rep/exercise_model.dart';
+import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_exercise_model.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/tests/maximum_rep/form/bloc/max_rep_form_bloc.dart';
 import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
@@ -23,7 +22,7 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
   final MaxRepFormBloc _bloc = MaxRepFormBloc();
   final _formKey = GlobalKey<FormState>();
 
-  List<ExerciseModel> items = [];
+  List<MaxRepExerciseModel> items = [];
 
   @override
   void initState() {

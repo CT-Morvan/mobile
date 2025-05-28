@@ -9,13 +9,13 @@ final class MaxRepGetFormEvent extends MaxRepFormEvent {}
 
 final class MaxRepSendFormEvent extends MaxRepFormEvent {
   final int? userId;
-  final List<ExerciseModel> exercises;
+  final List<MaxRepExerciseModel> exercises;
 
   const MaxRepSendFormEvent({required this.userId, required this.exercises});
 }
 
 final class MaxRepResetStateEvent extends MaxRepFormEvent {
-  final List<ExerciseModel> itens;
+  final List<MaxRepExerciseModel> itens;
 
   const MaxRepResetStateEvent({required this.itens});
 }

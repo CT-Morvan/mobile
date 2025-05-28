@@ -14,7 +14,7 @@ final class MaxRepGetFormErrorState extends MaxRepFormState {
 }
 
 final class MaxRepGetFormSuccessState extends MaxRepFormState {
-  final List<ExerciseModel>? list;
+  final List<MaxRepExerciseModel>? list;
   MaxRepGetFormSuccessState({required this.list});
 }
 

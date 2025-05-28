@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ct_morvan_app/models/tests/maximum_rep/exercise_model.dart';
+import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_exercise_model.dart';
 import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_create_model.dart';
 import 'package:ct_morvan_app/models/tests/maximum_rep/max_rep_form_model.dart';
 import 'package:ct_morvan_app/sdk/api/max_rep/max_rep_form_store_api.dart';
