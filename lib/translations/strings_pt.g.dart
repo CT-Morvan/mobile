@@ -102,14 +102,18 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get createPatient => 'Criar aluno';
 	String get adminListEmpty => 'Sem administradores cadastrados';
 	String get createAdmin => 'Criar administrador';
+	String get cancel => 'Cancelar';
+	String get invalidEmail => 'Email invalido';
 	String get deleteUserTitle => 'Excluir usuário?';
 	String get deleteUserDescription => 'Você tem certeza que deseja excluir esse usuário? Ao excluir um usuário, todos os testes vinculados serão excluídos também.\nEssa ação é irreversível!';
-	String get cancel => 'Cancelar';
 	String get pleaseWait => 'Por favor aguarde';
 	String get deleteUserError => 'Ocorreu um erro ao excluir o usuário';
 	String get deleteUserSuccess => 'Usuário excluído com sucesso';
-	String get invalidEmail => 'Email invalido';
 	String get exercises => 'Exercícios';
+	String get deleteExerciseTitle => 'Excluir exercício?';
+	String get deleteExerciseDescription => 'Você tem certeza que deseja excluir esse exercício? Ao excluir um exercício, todo o histórico desse exercício nos resultados serão excluídos também.\nEssa ação é irreversível!';
+	String get deleteExerciseError => 'Ocorreu um erro ao excluir o exercício';
+	String get deleteExerciseSuccess => 'Exercício excluído com sucesso';
 }
 
 /// Flat map(s) containing all translations.
@@ -180,14 +184,18 @@ extension on Translations {
 			case 'createPatient': return 'Criar aluno';
 			case 'adminListEmpty': return 'Sem administradores cadastrados';
 			case 'createAdmin': return 'Criar administrador';
+			case 'cancel': return 'Cancelar';
+			case 'invalidEmail': return 'Email invalido';
 			case 'deleteUserTitle': return 'Excluir usuário?';
 			case 'deleteUserDescription': return 'Você tem certeza que deseja excluir esse usuário? Ao excluir um usuário, todos os testes vinculados serão excluídos também.\nEssa ação é irreversível!';
-			case 'cancel': return 'Cancelar';
 			case 'pleaseWait': return 'Por favor aguarde';
 			case 'deleteUserError': return 'Ocorreu um erro ao excluir o usuário';
 			case 'deleteUserSuccess': return 'Usuário excluído com sucesso';
-			case 'invalidEmail': return 'Email invalido';
 			case 'exercises': return 'Exercícios';
+			case 'deleteExerciseTitle': return 'Excluir exercício?';
+			case 'deleteExerciseDescription': return 'Você tem certeza que deseja excluir esse exercício? Ao excluir um exercício, todo o histórico desse exercício nos resultados serão excluídos também.\nEssa ação é irreversível!';
+			case 'deleteExerciseError': return 'Ocorreu um erro ao excluir o exercício';
+			case 'deleteExerciseSuccess': return 'Exercício excluído com sucesso';
 			default: return null;
 		}
 	}

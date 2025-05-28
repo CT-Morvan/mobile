@@ -5,6 +5,10 @@ import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/exercises/bloc/list_exercises_bloc.dart';
 import 'package:ct_morvan_app/view/exercises/widget/exercise_list_item_widget.dart';
+import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_item_widget.dart';
+import 'package:ct_morvan_app/widget/bottom_sheet/bottom_sheet_widget.dart';
+import 'package:ct_morvan_app/widget/dialog/generic_loading_dialog.dart';
+import 'package:ct_morvan_app/widget/dialog/generic_option_dialog.dart';
 import 'package:ct_morvan_app/widget/fullscreen_message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,13 +43,13 @@ class _ListExercisesViewState extends State<ListExercisesView> {
             Navigator.of(context).pop();
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(t.deleteUserError)));
+            ).showSnackBar(SnackBar(content: Text(t.deleteExerciseError)));
           }
           if (state is DeleteExerciseStateSuccess) {
             Navigator.of(context).pop();
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(t.deleteUserSuccess)));
+            ).showSnackBar(SnackBar(content: Text(t.deleteExerciseSuccess)));
             fetchData();
           }
         },
@@ -71,7 +75,48 @@ class _ListExercisesViewState extends State<ListExercisesView> {
                 ExerciseModel exercise = state.list[index];
                 return ExerciseListItemWidget(
                   exerciseName: exercise.name ?? "",
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return BottomSheetWidget(
+                          title: t.actions,
+                          itens: [
+                            BottomSheetItemWidget(
+                              icon: Icons.delete,
+                              text: t.delete,
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return GenericOptionDialog(
+                                      title: t.deleteExerciseTitle,
+                                      description: t.deleteExerciseDescription,
+                                      primaryButtonFunction: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return GenericLoadingDialog();
+                                          },
+                                        );
+                                        _bloc.add(
+                                          ListExercisesDeleteEvent(
+                                            exerciseId: exercise.id,
+                                          ),
+                                        );
+                                      },
+                                      primaryButtonText: t.delete,
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 );
               },
               itemCount: state.list.length,

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ct_morvan_app/models/exercises/exercise_model.dart';
+import 'package:ct_morvan_app/models/generic_message.dart';
+import 'package:ct_morvan_app/sdk/api/exercises/delete_exercise_api.dart';
 import 'package:ct_morvan_app/sdk/api/exercises/list_exercises_api.dart';
 import 'package:meta/meta.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -23,19 +25,19 @@ class ListExercisesBloc extends Bloc<ListExercisesEvent, ListExercisesState> {
           emit(ListExercisesStateError(message: response.error));
       }
     });
-    // on<ListExercisesDeleteEvent>((event, emit) async {
-    //   emit(DeleteExerciseStateLoading());
+    on<ListExercisesDeleteEvent>((event, emit) async {
+      emit(DeleteExerciseStateLoading());
 
-    //   final api = DeleteUserApi(userId: event.userId);
+      final api = DeleteExerciseApi(exerciseId: event.exerciseId);
 
-    //   final response = await api.execute();
+      final response = await api.execute();
 
-    //   switch (response) {
-    //     case Success<GenericMessage, String>():
-    //       emit(DeleteUserStateSuccess());
-    //     case Error<GenericMessage, String>():
-    //       emit(DeleteUserStateError(message: response.error));
-    //   }
-    // });
+      switch (response) {
+        case Success<GenericMessage, String>():
+          emit(DeleteExerciseStateSuccess());
+        case Error<GenericMessage, String>():
+          emit(DeleteExerciseStateError(message: response.error));
+      }
+    });
   }
 }

@@ -59,11 +59,15 @@ patientsListEmpty: Sem alunos cadastrados
 createPatient: Criar aluno
 adminListEmpty: Sem administradores cadastrados
 createAdmin: Criar administrador
+cancel: Cancelar
+invalidEmail: Email invalido
 deleteUserTitle: Excluir usuário?
 deleteUserDescription: Você tem certeza que deseja excluir esse usuário? Ao excluir um usuário, todos os testes vinculados serão excluídos também.\nEssa ação é irreversível!
-cancel: Cancelar
 pleaseWait: Por favor aguarde
 deleteUserError: Ocorreu um erro ao excluir o usuário
 deleteUserSuccess: Usuário excluído com sucesso
-invalidEmail: Email invalido
 exercises: Exercícios
+deleteExerciseTitle: Excluir exercício?
+deleteExerciseDescription: Você tem certeza que deseja excluir esse exercício? Ao excluir um exercício, todo o histórico desse exercício nos resultados serão excluídos também.\nEssa ação é irreversível!
+deleteExerciseError: Ocorreu um erro ao excluir o exercício
+deleteExerciseSuccess: Exercício excluído com sucesso
