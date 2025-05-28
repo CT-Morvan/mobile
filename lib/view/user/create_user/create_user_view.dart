@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
+import 'package:ct_morvan_app/extensions/string_extension.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/user/create_user/bloc/create_user_bloc.dart';
 import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
@@ -103,6 +104,9 @@ class _CreateUserViewState extends State<CreateUserView> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return t.requiredField;
+                        }
+                        if (!value.checkIfIsValidEmail()) {
+                          return t.invalidEmail;
                         }
                         return null;
                       },

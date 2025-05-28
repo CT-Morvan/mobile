@@ -108,6 +108,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get pleaseWait => 'Por favor aguarde';
 	String get deleteUserError => 'Ocorreu um erro ao excluir o usuário';
 	String get deleteUserSuccess => 'Usuário excluído com sucesso';
+	String get invalidEmail => 'Email invalido';
 }
 
 /// Flat map(s) containing all translations.
@@ -184,6 +185,7 @@ extension on Translations {
 			case 'pleaseWait': return 'Por favor aguarde';
 			case 'deleteUserError': return 'Ocorreu um erro ao excluir o usuário';
 			case 'deleteUserSuccess': return 'Usuário excluído com sucesso';
+			case 'invalidEmail': return 'Email invalido';
 			default: return null;
 		}
 	}

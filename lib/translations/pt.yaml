@@ -65,3 +65,4 @@ cancel: Cancelar
 pleaseWait: Por favor aguarde
 deleteUserError: Ocorreu um erro ao excluir o usuário
 deleteUserSuccess: Usuário excluído com sucesso
+invalidEmail: Email invalido
