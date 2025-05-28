@@ -44,13 +44,13 @@ class _ListUsersViewState extends State<ListUsersView> {
             if (state is ListUsersStateError) {
               ScaffoldMessenger.of(
                 context,
-              ).showSnackBar(SnackBar(content: Text(t.genericError)));
+              ).showSnackBar(SnackBar(content: Text(state.message)));
             }
             if (state is DeleteUserStateError) {
               Navigator.of(context).pop();
               ScaffoldMessenger.of(
                 context,
-              ).showSnackBar(SnackBar(content: Text(t.deleteUserError)));
+              ).showSnackBar(SnackBar(content: Text(state.message)));
             }
             if (state is DeleteUserStateSuccess) {
               Navigator.of(context).pop();
@@ -190,6 +190,7 @@ class _ListUsersViewState extends State<ListUsersView> {
                               return GenericOptionDialog(
                                 title: t.deleteUserTitle,
                                 description: t.deleteUserDescription,
+                                icon: Icon(Icons.delete, size: 64, color: grayColor),
                                 primaryButtonFunction: () {
                                   showDialog(
                                     context: context,

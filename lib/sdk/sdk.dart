@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_constants.dart';
+import 'package:ct_morvan_app/models/generic_message.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/sdk/api/api.dart';
 import 'package:ct_morvan_app/sdk/shared_preferences_controller.dart';
+import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -42,7 +44,10 @@ class Sdk {
         _dio.options.headers.addAll(await getHeaders());
       }
 
+      _dio.options.validateStatus = api.isValidStatusCode;
+
       Response<T> response;
+
       switch (api.getMethod()) {
         case HttpMethod.get:
           response = await _dio.get<T>(
@@ -75,10 +80,24 @@ class Sdk {
       }
 
       return Error("Erro inesperado");
+    } on DioException catch (error, stack) {
+      print("$error: $stack");
+      return Error(createMessageError(error, api));
     } catch (error, stack) {
       print("$error: $stack");
       return Error(error.toString());
     }
+  }
+
+  String createMessageError(DioException? error, Api api) {
+    if (error != null && error.response?.data is Map<String, dynamic>) {
+      GenericMessage message = GenericMessage.fromJson(
+        error.response!.data as Map<String, dynamic>,
+      );
+      return message.message;
+    }
+
+    return t.genericError;
   }
 
   Future<Map<String, String>> getHeaders() async {
@@ -86,7 +105,7 @@ class Sdk {
     final user = await SharedPreferencesController().getLoggedUser();
     req.addAll({
       "Authorization": "Bearer ${user?.token}",
-      "application": "application/json",
+      "Accept": "application/json",
       'Content-Type': 'application/json',
     });
 

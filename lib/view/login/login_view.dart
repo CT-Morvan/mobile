@@ -49,7 +49,7 @@ class _LoginViewState extends State<LoginView> {
           if (state is LoginErrorState) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(t.invalidCredentials)));
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         bloc: _bloc,

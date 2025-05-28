@@ -11,6 +11,7 @@ class GenericOptionDialog extends StatelessWidget {
   final String primaryButtonText;
   final void Function()? secondaryButtonFunction;
   final String? secondaryButtonText;
+  final Widget? icon;
 
   const GenericOptionDialog({
     required this.title,
@@ -19,6 +20,7 @@ class GenericOptionDialog extends StatelessWidget {
     required this.primaryButtonText,
     this.secondaryButtonFunction,
     this.secondaryButtonText,
+    this.icon,
     super.key,
   });
 
@@ -32,10 +34,9 @@ class GenericOptionDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Icon(Icons.delete, size: 64, color: grayColor),
-            ),
+            if (icon != null) ...[
+              Padding(padding: const EdgeInsets.only(bottom: 8), child: icon),
+            ],
             Text(
               title,
               style: TextStyle(

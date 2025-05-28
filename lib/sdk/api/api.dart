@@ -1,3 +1,4 @@
+import 'package:ct_morvan_app/sdk/api/enum_code_api.dart';
 import 'package:ct_morvan_app/sdk/sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -37,6 +38,14 @@ abstract class Api<T, R> {
 
   Map<String, dynamic> getParameters() {
     return {};
+  }
+
+  bool isValidStatusCode(int? statusCode) {
+    if (statusCode != null) {
+      return EnumCodeApi.getCodeApi(statusCode: statusCode).isValidStatusCode();
+    }
+
+    return false;
   }
 }
 

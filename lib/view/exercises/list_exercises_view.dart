@@ -44,7 +44,7 @@ class _ListExercisesViewState extends State<ListExercisesView> {
             Navigator.of(context).pop();
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(t.deleteExerciseError)));
+            ).showSnackBar(SnackBar(content: Text(state.message)));
             fetchData();
           }
           if (state is DeleteExerciseStateSuccess) {
@@ -58,7 +58,7 @@ class _ListExercisesViewState extends State<ListExercisesView> {
             Navigator.of(context).pop();
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(t.createExerciseError)));
+            ).showSnackBar(SnackBar(content: Text(state.message)));
             fetchData();
           }
           if (state is CreateExerciseStateSuccess) {
@@ -109,6 +109,11 @@ class _ListExercisesViewState extends State<ListExercisesView> {
                                     return GenericOptionDialog(
                                       title: t.deleteExerciseTitle,
                                       description: t.deleteExerciseDescription,
+                                      icon: Icon(
+                                        Icons.delete,
+                                        size: 64,
+                                        color: grayColor,
+                                      ),
                                       primaryButtonFunction: () {
                                         showDialog(
                                           context: context,
