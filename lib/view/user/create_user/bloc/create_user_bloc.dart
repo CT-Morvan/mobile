@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ct_morvan_app/models/enum/user_type_enum.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
-import 'package:ct_morvan_app/sdk/api/create_user_api.dart';
+import 'package:ct_morvan_app/sdk/api/user/create_user_api.dart';
 import 'package:meta/meta.dart';
 import 'package:multiple_result/multiple_result.dart';
 

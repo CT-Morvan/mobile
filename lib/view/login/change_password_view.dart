@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ct_morvan_app/consts/app_assets.dart';
+import 'package:ct_morvan_app/gen/assets.gen.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
@@ -62,7 +62,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(ctMorvanLogo),
+              Assets.images.logo.image(),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: AppTextFieldWidget(

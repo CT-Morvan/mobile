@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ct_morvan_app/consts/app_assets.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
+import 'package:ct_morvan_app/gen/assets.gen.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/widget/primary_button_widget.dart';
@@ -23,7 +23,7 @@ class _FirstLoginViewState extends State<FirstLoginView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(ctMorvanLogo),
+            Assets.images.logo.image(),
             Text(
               t.welcomeTitle(name: "Lucas"),
               style: TextStyle(fontSize: 24, color: textColor),

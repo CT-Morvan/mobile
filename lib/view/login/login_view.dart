@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ct_morvan_app/consts/app_assets.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
 import 'package:ct_morvan_app/extensions/string_extension.dart';
+import 'package:ct_morvan_app/gen/assets.gen.dart';
 import 'package:ct_morvan_app/routes/ct_morvan_routes.gr.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/login/bloc/login_bloc.dart';
@@ -69,7 +69,7 @@ class _LoginViewState extends State<LoginView> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    Image.asset(ctMorvanLogo),
+                    Assets.images.logo.image(),
                     Padding(
                       padding: const EdgeInsets.only(top: 16),
                       child: AppTextFieldWidget(

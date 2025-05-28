@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ct_morvan_app/models/tests/bioimpedance/bioimpedance_model.dart';
-import 'package:ct_morvan_app/sdk/api/bioimpedance_store_api.dart';
+import 'package:ct_morvan_app/sdk/api/bioimpedance/bioimpedance_store_api.dart';
 import 'package:meta/meta.dart';
 import 'package:multiple_result/multiple_result.dart';
 

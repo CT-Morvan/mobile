@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:ct_morvan_app/models/generic_message.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
-import 'package:ct_morvan_app/sdk/api/delete_user_api.dart';
-import 'package:ct_morvan_app/sdk/api/list_users_api.dart';
+import 'package:ct_morvan_app/sdk/api/user/delete_user_api.dart';
+import 'package:ct_morvan_app/sdk/api/user/list_users_api.dart';
 import 'package:ct_morvan_app/sdk/shared_preferences_controller.dart';
 import 'package:meta/meta.dart';
 import 'package:multiple_result/multiple_result.dart';
