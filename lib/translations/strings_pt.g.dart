@@ -109,6 +109,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get deleteUserError => 'Ocorreu um erro ao excluir o usuário';
 	String get deleteUserSuccess => 'Usuário excluído com sucesso';
 	String get invalidEmail => 'Email invalido';
+	String get exercises => 'Exercícios';
 }
 
 /// Flat map(s) containing all translations.
@@ -186,6 +187,7 @@ extension on Translations {
 			case 'deleteUserError': return 'Ocorreu um erro ao excluir o usuário';
 			case 'deleteUserSuccess': return 'Usuário excluído com sucesso';
 			case 'invalidEmail': return 'Email invalido';
+			case 'exercises': return 'Exercícios';
 			default: return null;
 		}
 	}

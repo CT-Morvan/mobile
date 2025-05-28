@@ -43,6 +43,7 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
                   TestsViewRoute(user: state.user),
                 ] else ...[
                   ListUsersViewRoute(),
+                  ListExercisesViewRoute(),
                 ],
                 UserViewRoute(user: state.user),
               ],
@@ -71,6 +72,10 @@ class _NavigationMenuViewState extends State<NavigationMenuView> {
                           BottomNavigationBarItem(
                             icon: Icon(Icons.people),
                             label: t.users,
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.fitness_center),
+                            label: t.exercises,
                           ),
                         ],
                         BottomNavigationBarItem(

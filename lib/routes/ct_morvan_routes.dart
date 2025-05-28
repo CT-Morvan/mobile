@@ -15,6 +15,7 @@ class CtMorvanRoutes extends RootStackRouter {
       children: [
         AutoRoute(page: TestsViewRoute.page),
         AutoRoute(page: ListUsersViewRoute.page),
+        AutoRoute(page: ListExercisesViewRoute.page),
         AutoRoute(page: UserViewRoute.page),
       ],
       guards: [AuthGuard()],
