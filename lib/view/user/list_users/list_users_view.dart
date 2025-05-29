@@ -86,8 +86,13 @@ class _ListUsersViewState extends State<ListUsersView> {
 
               return TabBarView(
                 children: [
-                  getTab(patients, t.patientsListEmpty, t.createPatient),
-                  getTab(admins, t.adminListEmpty, t.createAdmin),
+                  getTab(
+                    patients,
+                    t.patientsListEmpty,
+                    t.createPatient,
+                    fetchData,
+                  ),
+                  getTab(admins, t.adminListEmpty, t.createAdmin, fetchData),
                 ],
               );
             }
@@ -128,122 +133,135 @@ class _ListUsersViewState extends State<ListUsersView> {
     Iterable<UserModel> users,
     String listEmptyMessage,
     String listEmptyTextButton,
+    Future<void> Function() onRefresh,
   ) {
     if (users.isNotEmpty) {
-      return ListView.builder(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        itemBuilder: (buildContext, index) {
-          UserModel user = users.toList()[index];
-          return UserListItemWidget(
-            user: user,
-            mainOnTap:
-                user.type == UserTypeEnum.admin
-                    ? null
-                    : () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return BottomSheetWidget(
-                            title: t.storeTests,
-                            itens: [
-                              BottomSheetItemWidget(
-                                icon: Icons.show_chart,
-                                text: t.maximumRepTest,
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                  AutoRouter.of(context).push(
-                                    MaximumRepFormViewRoute(userId: user.id),
-                                  );
-                                },
-                              ),
-                              BottomSheetItemWidget(
-                                icon: Icons.show_chart,
-                                text: t.bioimpedance,
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                  AutoRouter.of(context).push(
-                                    BioimpedanceFormViewRoute(userId: user.id),
-                                  );
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-            secondaryOnTap: () {
-              showModalBottomSheet<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return BottomSheetWidget(
-                    title: t.actions,
-                    itens: [
-                      BottomSheetItemWidget(
-                        icon: Icons.delete,
-                        text: t.delete,
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return GenericOptionDialog(
-                                title: t.deleteUserTitle,
-                                description: t.deleteUserDescription,
-                                icon: Icon(Icons.delete, size: 64, color: grayColor),
-                                primaryButtonFunction: () {
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (BuildContext context) {
-                                      return GenericLoadingDialog();
-                                    },
-                                  );
-                                  _bloc.add(
-                                    ListUserDeleteEvent(userId: user.id),
-                                  );
-                                },
-                                primaryButtonText: t.delete,
-                              );
-                            },
-                          );
-                        },
-                      ),
-                      BottomSheetItemWidget(
-                        icon: Icons.edit,
-                        text: t.edit,
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      BottomSheetItemWidget(
-                        icon: Icons.show_chart,
-                        text: t.viewTestsTitle(name: t.maximumRepTest),
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          AutoRouter.of(
-                            context,
-                          ).push(MaximumRepResultsViewRoute(user: user));
-                        },
-                      ),
-                      BottomSheetItemWidget(
-                        icon: Icons.show_chart,
-                        text: t.viewTestsTitle(name: t.bioimpedance),
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          AutoRouter.of(
-                            context,
-                          ).push(BioimpedanceResultViewRoute(user: user));
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          );
-        },
-        itemCount: users.length,
+      return RefreshIndicator(
+        color: primaryColor,
+        onRefresh: onRefresh,
+        child: ListView.builder(
+          physics: BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          itemBuilder: (buildContext, index) {
+            UserModel user = users.toList()[index];
+            return UserListItemWidget(
+              user: user,
+              mainOnTap:
+                  user.type == UserTypeEnum.admin
+                      ? null
+                      : () {
+                        showModalBottomSheet<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return BottomSheetWidget(
+                              title: t.storeTests,
+                              itens: [
+                                BottomSheetItemWidget(
+                                  icon: Icons.show_chart,
+                                  text: t.maximumRepTest,
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    AutoRouter.of(context).push(
+                                      MaximumRepFormViewRoute(userId: user.id),
+                                    );
+                                  },
+                                ),
+                                BottomSheetItemWidget(
+                                  icon: Icons.show_chart,
+                                  text: t.bioimpedance,
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    AutoRouter.of(context).push(
+                                      BioimpedanceFormViewRoute(
+                                        userId: user.id,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+              secondaryOnTap: () {
+                showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BottomSheetWidget(
+                      title: t.actions,
+                      itens: [
+                        BottomSheetItemWidget(
+                          icon: Icons.delete,
+                          text: t.delete,
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return GenericOptionDialog(
+                                  title: t.deleteUserTitle,
+                                  description: t.deleteUserDescription,
+                                  icon: Icon(
+                                    Icons.delete,
+                                    size: 64,
+                                    color: grayColor,
+                                  ),
+                                  primaryButtonFunction: () {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                        return GenericLoadingDialog();
+                                      },
+                                    );
+                                    _bloc.add(
+                                      ListUserDeleteEvent(userId: user.id),
+                                    );
+                                  },
+                                  primaryButtonText: t.delete,
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        BottomSheetItemWidget(
+                          icon: Icons.edit,
+                          text: t.edit,
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        BottomSheetItemWidget(
+                          icon: Icons.show_chart,
+                          text: t.viewTestsTitle(name: t.maximumRepTest),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            AutoRouter.of(
+                              context,
+                            ).push(MaximumRepResultsViewRoute(user: user));
+                          },
+                        ),
+                        BottomSheetItemWidget(
+                          icon: Icons.show_chart,
+                          text: t.viewTestsTitle(name: t.bioimpedance),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            AutoRouter.of(
+                              context,
+                            ).push(BioimpedanceResultViewRoute(user: user));
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            );
+          },
+          itemCount: users.length,
+        ),
       );
     }
     return FullscreenMessageWidget(
@@ -257,7 +275,7 @@ class _ListUsersViewState extends State<ListUsersView> {
     );
   }
 
-  void fetchData() {
+  Future<void> fetchData() async {
     _bloc.add(ListUsersGetEvent());
   }
 }

@@ -31,7 +31,7 @@ class _ListExercisesViewState extends State<ListExercisesView> {
     fetchData();
   }
 
-  void fetchData() {
+  Future<void> fetchData() async {
     _bloc.add(ListExercisesGetEvent());
   }
 
@@ -84,64 +84,71 @@ class _ListExercisesViewState extends State<ListExercisesView> {
               );
             }
 
-            return ListView.builder(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              itemBuilder: (buildContext, index) {
-                ExerciseModel exercise = state.list[index];
-                return ExerciseListItemWidget(
-                  exerciseName: exercise.name ?? "",
-                  onTap: () {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return BottomSheetWidget(
-                          title: t.actions,
-                          itens: [
-                            BottomSheetItemWidget(
-                              icon: Icons.delete,
-                              text: t.delete,
-                              onTap: () {
-                                Navigator.of(context).pop();
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return GenericOptionDialog(
-                                      title: t.deleteExerciseTitle,
-                                      description: t.deleteExerciseDescription,
-                                      icon: Icon(
-                                        Icons.delete,
-                                        size: 64,
-                                        color: grayColor,
-                                      ),
-                                      primaryButtonFunction: () {
-                                        showDialog(
-                                          context: context,
-                                          barrierDismissible: false,
-                                          builder: (BuildContext context) {
-                                            return GenericLoadingDialog();
-                                          },
-                                        );
-                                        _bloc.add(
-                                          ListExercisesDeleteEvent(
-                                            exerciseId: exercise.id,
-                                          ),
-                                        );
-                                      },
-                                      primaryButtonText: t.delete,
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-              itemCount: state.list.length,
+            return RefreshIndicator(
+              color: primaryColor,
+              onRefresh: fetchData,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                itemBuilder: (buildContext, index) {
+                  ExerciseModel exercise = state.list[index];
+                  return ExerciseListItemWidget(
+                    exerciseName: exercise.name ?? "",
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BottomSheetWidget(
+                            title: t.actions,
+                            itens: [
+                              BottomSheetItemWidget(
+                                icon: Icons.delete,
+                                text: t.delete,
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return GenericOptionDialog(
+                                        title: t.deleteExerciseTitle,
+                                        description:
+                                            t.deleteExerciseDescription,
+                                        icon: Icon(
+                                          Icons.delete,
+                                          size: 64,
+                                          color: grayColor,
+                                        ),
+                                        primaryButtonFunction: () {
+                                          showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (BuildContext context) {
+                                              return GenericLoadingDialog();
+                                            },
+                                          );
+                                          _bloc.add(
+                                            ListExercisesDeleteEvent(
+                                              exerciseId: exercise.id,
+                                            ),
+                                          );
+                                        },
+                                        primaryButtonText: t.delete,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+                itemCount: state.list.length,
+              ),
             );
           }
 

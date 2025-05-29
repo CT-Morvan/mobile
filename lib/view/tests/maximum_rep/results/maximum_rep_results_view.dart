@@ -47,17 +47,23 @@ class _MaximumRepResultsViewState extends State<MaximumRepResultsView> {
                 );
               }
 
-              return ListView.separated(
-                physics: BouncingScrollPhysics(),
-                separatorBuilder: (context, index) => Divider(),
-                itemBuilder: (context, index) {
-                  return MaximumRepChartWidget(
-                    title: state.list[index].name ?? "",
-                    series: state.list[index].maximums ?? [],
-                  );
-                },
-                itemCount: state.list.length,
-                shrinkWrap: true,
+              return RefreshIndicator(
+                color: primaryColor,
+                onRefresh: _fetchData,
+                child: ListView.separated(
+                  physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  separatorBuilder: (context, index) => Divider(),
+                  itemBuilder: (context, index) {
+                    return MaximumRepChartWidget(
+                      title: state.list[index].name ?? "",
+                      series: state.list[index].maximums ?? [],
+                    );
+                  },
+                  itemCount: state.list.length,
+                  shrinkWrap: true,
+                ),
               );
             }
 
@@ -86,7 +92,7 @@ class _MaximumRepResultsViewState extends State<MaximumRepResultsView> {
     _fetchData();
   }
 
-  void _fetchData() {
+  Future<void> _fetchData() async {
     _bloc.add(MaxRepResultEvent(userId: widget.user.id));
   }
 }

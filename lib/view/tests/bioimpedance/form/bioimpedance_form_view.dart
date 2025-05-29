@@ -131,7 +131,9 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
           return SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
-              physics: BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
               child: Form(
                 key: _formKey,
                 child: Column(

@@ -30,7 +30,7 @@ class _BioimpedanceResultViewState extends State<BioimpedanceResultView> {
     super.initState();
   }
 
-  void _fetchData() {
+  Future<void> _fetchData() async {
     _bloc.add(BioimpedanceResultEvent(userId: widget.user.id));
   }
 
@@ -70,71 +70,78 @@ class _BioimpedanceResultViewState extends State<BioimpedanceResultView> {
                   },
                 );
               }
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    BioimpedancePercentageGraphicWidget(list: state.list),
-                    GenericChartWidget(
-                      title: t.weight,
-                      label: t.weight,
-                      unit: t.kg,
-                      series: createSerie(
-                        Map.fromEntries(
-                          state.list.map(
-                            (value) => MapEntry(value.date!, value.weight!),
+              return RefreshIndicator(
+                color: primaryColor,
+                onRefresh: _fetchData,
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  child: Column(
+                    children: [
+                      BioimpedancePercentageGraphicWidget(list: state.list),
+                      GenericChartWidget(
+                        title: t.weight,
+                        label: t.weight,
+                        unit: t.kg,
+                        series: createSerie(
+                          Map.fromEntries(
+                            state.list.map(
+                              (value) => MapEntry(value.date!, value.weight!),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    GenericChartWidget(
-                      title: t.basalMetabolism,
-                      label: t.basalMetabolism,
-                      series: createSerie(
-                        Map.fromEntries(
-                          state.list.map(
-                            (value) =>
-                                MapEntry(value.date!, value.basalMetabolism!),
+                      GenericChartWidget(
+                        title: t.basalMetabolism,
+                        label: t.basalMetabolism,
+                        series: createSerie(
+                          Map.fromEntries(
+                            state.list.map(
+                              (value) =>
+                                  MapEntry(value.date!, value.basalMetabolism!),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    GenericChartWidget(
-                      title: t.metabolicAge,
-                      label: t.metabolicAge,
-                      unit: t.years,
-                      series: createSerie(
-                        Map.fromEntries(
-                          state.list.map(
-                            (value) =>
-                                MapEntry(value.date!, value.metabolicAge!),
+                      GenericChartWidget(
+                        title: t.metabolicAge,
+                        label: t.metabolicAge,
+                        unit: t.years,
+                        series: createSerie(
+                          Map.fromEntries(
+                            state.list.map(
+                              (value) =>
+                                  MapEntry(value.date!, value.metabolicAge!),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    GenericChartWidget(
-                      title: t.visceralFat,
-                      label: t.visceralFat,
-                      series: createSerie(
-                        Map.fromEntries(
-                          state.list.map(
-                            (value) =>
-                                MapEntry(value.date!, value.visceralFat!),
+                      GenericChartWidget(
+                        title: t.visceralFat,
+                        label: t.visceralFat,
+                        series: createSerie(
+                          Map.fromEntries(
+                            state.list.map(
+                              (value) =>
+                                  MapEntry(value.date!, value.visceralFat!),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    GenericChartWidget(
-                      title: t.imc,
-                      label: t.imc,
-                      series: createSerie(
-                        Map.fromEntries(
-                          state.list.map(
-                            (value) => MapEntry(value.date!, value.imc!),
+                      GenericChartWidget(
+                        title: t.imc,
+                        label: t.imc,
+                        series: createSerie(
+                          Map.fromEntries(
+                            state.list.map(
+                              (value) => MapEntry(value.date!, value.imc!),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             }
