@@ -121,6 +121,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get createExerciseSuccess => 'Exercício criado com sucesso';
 	String get createExerciseError => 'Ocorreu um erro ao criar o exercício';
 	String get save => 'Salvar';
+	String get close => 'Fechar';
+	String license({required Object name}) => 'Licença ${name}';
+	String get openSourceLicenses => 'Licenças de código aberto';
 }
 
 /// Flat map(s) containing all translations.
@@ -210,6 +213,9 @@ extension on Translations {
 			case 'createExerciseSuccess': return 'Exercício criado com sucesso';
 			case 'createExerciseError': return 'Ocorreu um erro ao criar o exercício';
 			case 'save': return 'Salvar';
+			case 'close': return 'Fechar';
+			case 'license': return ({required Object name}) => 'Licença ${name}';
+			case 'openSourceLicenses': return 'Licenças de código aberto';
 			default: return null;
 		}
 	}

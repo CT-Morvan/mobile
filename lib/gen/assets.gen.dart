@@ -25,11 +25,14 @@ class $AssetsImagesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/license.svg
+  SvgGenImage get license => const SvgGenImage('assets/svg/license.svg');
+
   /// File path: assets/svg/list_empty.svg
   SvgGenImage get listEmpty => const SvgGenImage('assets/svg/list_empty.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [listEmpty];
+  List<SvgGenImage> get values => [license, listEmpty];
 }
 
 class Assets {

@@ -31,5 +31,6 @@ class CtMorvanRoutes extends RootStackRouter {
     AutoRoute(page: UserViewRoute.page),
     AutoRoute(page: BioimpedanceFormViewRoute.page),
     AutoRoute(page: BioimpedanceResultViewRoute.page),
+    AutoRoute(page: LicensesViewRoute.page)
   ];
 }

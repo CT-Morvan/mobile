@@ -37,7 +37,15 @@ class _LoginViewState extends State<LoginView> {
         backgroundColor: Colors.transparent,
         forceMaterialTransparency: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.help_outline_outlined)),
+          IconButton(
+            onPressed: () {
+              AutoRouter.of(context).push(LicensesViewRoute());
+            },
+            icon: Assets.svg.license.svg(
+              height: 24,
+              colorFilter: ColorFilter.mode(grayColor, BlendMode.srcATop),
+            ),
+          ),
         ],
       ),
       backgroundColor: Colors.white,
