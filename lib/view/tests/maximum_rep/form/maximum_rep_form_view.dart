@@ -50,7 +50,11 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             _bloc.add(
-              MaxRepSendFormEvent(userId: widget.userId, exercises: items, date: selectedDate),
+              MaxRepSendFormEvent(
+                userId: widget.userId,
+                exercises: items,
+                date: selectedDate,
+              ),
             );
           }
         },
@@ -229,10 +233,22 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: primaryColor,
+              onPrimary: whiteColor,
+              primary: primaryColor,
+            ),
+          ),
+          child: child!,
+        );
+      },
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2015, 8),
-      lastDate: DateTime(2101),
+      lastDate: DateTime.now(),
     );
     if (picked != null && picked != selectedDate) {
       setState(() {

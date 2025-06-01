@@ -291,6 +291,18 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: primaryColor,
+              onPrimary: whiteColor,
+              primary: primaryColor,
+            ),
+          ),
+          child: child!,
+        );
+      },
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2015, 8),

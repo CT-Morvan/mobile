@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:ct_morvan_app/consts/app_colors.dart';
-import 'package:ct_morvan_app/models/tests/bioimpedance/bioimpedance_model.dart';
 import 'package:ct_morvan_app/models/user_model.dart';
 import 'package:ct_morvan_app/translations/strings.g.dart';
 import 'package:ct_morvan_app/view/tests/bioimpedance/result/bloc/bioimpedance_result_bloc.dart';

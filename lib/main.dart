@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: primaryColor,
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
         scaffoldBackgroundColor: backgroundColor,
         appBarTheme: AppBarTheme(
           centerTitle: true,
@@ -60,6 +61,12 @@ class MyApp extends StatelessWidget {
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: primaryColor,
+        ),
+        datePickerTheme: const DatePickerThemeData(
+          headerBackgroundColor: primaryColor,
+          backgroundColor: whiteColor,
+          headerForegroundColor: whiteColor,
+          surfaceTintColor: whiteColor,
         ),
       ),
       routerDelegate: appRouter.delegate(
