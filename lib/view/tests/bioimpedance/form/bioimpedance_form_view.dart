@@ -132,7 +132,6 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
 
           return SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
               physics: BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics(),
               ),
@@ -140,143 +139,163 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            DateFormat(
-                              'dd/MM/yyyy',
-                            ).format(selectedDate).split(' ')[0],
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => _selectDate(context),
-                          child: Text(
-                            t.changeDate,
-                            style: TextStyle(color: primaryColor),
-                          ),
-                        ),
-                      ],
-                    ),
-                    AppTextFieldWidget(
-                      label: t.height,
-                      controller: heightController,
-                      textInputType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d+\.?\d{0,2}'),
-                        ),
-                      ],
-                      validator: validator,
-                      suffixText: t.cm,
-                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: AppTextFieldWidget(
-                        label: t.weight,
-                        controller: weightController,
-                        textInputType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}'),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              DateFormat(
+                                'dd/MM/yyyy',
+                              ).format(selectedDate).split(' ')[0],
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => _selectDate(context),
+                            child: Text(
+                              t.changeDate,
+                              style: TextStyle(color: primaryColor),
+                            ),
                           ),
                         ],
-                        validator: validator,
-                        suffixText: t.kg,
                       ),
                     ),
-                    AppTextFieldWidget(
-                      label: t.imc,
-                      controller: imcController,
-                      textInputType: TextInputType.numberWithOptions(
-                        decimal: true,
+                    Card(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d+\.?\d{0,2}'),
-                        ),
-                      ],
-                      validator: validator,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: AppTextFieldWidget(
-                        label: t.fatPercentage,
-                        controller: fatPercentageController,
-                        textInputType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}'),
-                          ),
-                        ],
-                        validator: validator,
-                        suffixText: t.percentageSymbol,
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
-                    ),
-                    AppTextFieldWidget(
-                      label: t.musclePercentage,
-                      controller: musclePercentageController,
-                      textInputType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d+\.?\d{0,2}'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            AppTextFieldWidget(
+                              label: t.height,
+                              controller: heightController,
+                              textInputType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d{0,2}'),
+                                ),
+                              ],
+                              validator: validator,
+                              suffixText: t.cm,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: AppTextFieldWidget(
+                                label: t.weight,
+                                controller: weightController,
+                                textInputType: TextInputType.numberWithOptions(
+                                  decimal: true,
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,2}'),
+                                  ),
+                                ],
+                                validator: validator,
+                                suffixText: t.kg,
+                              ),
+                            ),
+                            AppTextFieldWidget(
+                              label: t.imc,
+                              controller: imcController,
+                              textInputType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d{0,2}'),
+                                ),
+                              ],
+                              validator: validator,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: AppTextFieldWidget(
+                                label: t.fatPercentage,
+                                controller: fatPercentageController,
+                                textInputType: TextInputType.numberWithOptions(
+                                  decimal: true,
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,2}'),
+                                  ),
+                                ],
+                                validator: validator,
+                                suffixText: t.percentageSymbol,
+                              ),
+                            ),
+                            AppTextFieldWidget(
+                              label: t.musclePercentage,
+                              controller: musclePercentageController,
+                              textInputType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d{0,2}'),
+                                ),
+                              ],
+                              validator: validator,
+                              suffixText: t.percentageSymbol,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: AppTextFieldWidget(
+                                label: t.basalMetabolism,
+                                controller: basalMetabolismController,
+                                textInputType: TextInputType.numberWithOptions(
+                                  decimal: true,
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,2}'),
+                                  ),
+                                ],
+                                validator: validator,
+                              ),
+                            ),
+                            AppTextFieldWidget(
+                              label: t.metabolicAge,
+                              controller: metabolicAgeController,
+                              textInputType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d{0,2}'),
+                                ),
+                              ],
+                              validator: validator,
+                              suffixText: t.years,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 16),
+                              child: AppTextFieldWidget(
+                                label: t.visceralFat,
+                                controller: visceralFatController,
+                                textInputType: TextInputType.numberWithOptions(
+                                  decimal: true,
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,2}'),
+                                  ),
+                                ],
+                                validator: validator,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                      validator: validator,
-                      suffixText: t.percentageSymbol,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: AppTextFieldWidget(
-                        label: t.basalMetabolism,
-                        controller: basalMetabolismController,
-                        textInputType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}'),
-                          ),
-                        ],
-                        validator: validator,
-                      ),
-                    ),
-                    AppTextFieldWidget(
-                      label: t.metabolicAge,
-                      controller: metabolicAgeController,
-                      textInputType: TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d+\.?\d{0,2}'),
-                        ),
-                      ],
-                      validator: validator,
-                      suffixText: t.years,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: AppTextFieldWidget(
-                        label: t.visceralFat,
-                        controller: visceralFatController,
-                        textInputType: TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}'),
-                          ),
-                        ],
-                        validator: validator,
                       ),
                     ),
                   ],
