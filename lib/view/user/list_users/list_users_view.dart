@@ -233,26 +233,28 @@ class _ListUsersViewState extends State<ListUsersView> {
                             Navigator.of(context).pop();
                           },
                         ),
-                        BottomSheetItemWidget(
-                          icon: Icons.show_chart,
-                          text: t.viewTestsTitle(name: t.maximumRepTest),
-                          onTap: () {
-                            Navigator.of(context).pop();
-                            AutoRouter.of(
-                              context,
-                            ).push(MaximumRepResultsViewRoute(user: user));
-                          },
-                        ),
-                        BottomSheetItemWidget(
-                          icon: Icons.show_chart,
-                          text: t.viewTestsTitle(name: t.bioimpedance),
-                          onTap: () {
-                            Navigator.of(context).pop();
-                            AutoRouter.of(
-                              context,
-                            ).push(BioimpedanceResultViewRoute(user: user));
-                          },
-                        ),
+                        if (user.type == UserTypeEnum.patient) ...[
+                          BottomSheetItemWidget(
+                            icon: Icons.show_chart,
+                            text: t.viewTestsTitle(name: t.maximumRepTest),
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              AutoRouter.of(
+                                context,
+                              ).push(MaximumRepResultsViewRoute(user: user));
+                            },
+                          ),
+                          BottomSheetItemWidget(
+                            icon: Icons.show_chart,
+                            text: t.viewTestsTitle(name: t.bioimpedance),
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              AutoRouter.of(
+                                context,
+                              ).push(BioimpedanceResultViewRoute(user: user));
+                            },
+                          ),
+                        ],
                       ],
                     );
                   },
