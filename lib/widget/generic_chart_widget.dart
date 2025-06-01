@@ -46,7 +46,7 @@ class GenericChartWidget extends StatelessWidget {
                 t.date: Variable(
                   accessor: (GenericChartModel datum) => datum.date,
                   scale: TimeScale(
-                    formatter: (time) => DateFormat('dd/MM').format(time),
+                    formatter: (time) => DateFormat('dd/MM/yy').format(time),
                   ),
                 ),
                 label: Variable(

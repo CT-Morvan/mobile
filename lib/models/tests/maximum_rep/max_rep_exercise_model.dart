@@ -30,12 +30,12 @@ class MaxRepExerciseModel {
 
   Map<String, dynamic> toJson() => _$MaxRepExerciseModelToJson(this);
 
-  MaxRepCreateModel toMaxRepCreateModel() {
+  MaxRepCreateModel toMaxRepCreateModel(DateTime date) {
     return MaxRepCreateModel(
       workload: workload,
       exerciseId: id,
       maxReps: maxRep,
-      date: DateTime.now(),
+      date: date,
     );
   }
 }

@@ -52,7 +52,7 @@ class BioimpedancePercentageGraphicWidget extends StatelessWidget {
           t.date: Variable(
             accessor: (BioimpedanceGraphicModel datum) => datum.day,
             scale: TimeScale(
-              formatter: (time) => DateFormat('dd/MM').format(time),
+              formatter: (time) => DateFormat('dd/MM/yy').format(time),
             ),
           ),
           'value': Variable(

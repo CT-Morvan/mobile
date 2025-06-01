@@ -7,6 +7,7 @@ import 'package:ct_morvan_app/widget/app_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage(name: "BioimpedanceFormViewRoute")
 class BioimpedanceFormView extends StatefulWidget {
@@ -29,6 +30,7 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
 
   final _formKey = GlobalKey<FormState>();
   final BioimpedanceFormBloc _bloc = BioimpedanceFormBloc();
+  DateTime selectedDate = DateTime.now();
 
   bool isLoading = false;
 
@@ -49,7 +51,7 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
     if (value == null || value.isEmpty) {
       return t.requiredField;
     }
-    if (int.parse(value) < 1) {
+    if (double.parse(value) < 1) {
       return t.minimumValue(value: 0);
     }
     return null;
@@ -67,7 +69,7 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                 : () {
                   if (_formKey.currentState!.validate()) {
                     final bioimpedance = BioimpedanceModel(
-                      date: DateTime.now(),
+                      date: selectedDate,
                       height: double.tryParse(heightController.text),
                       weight: double.tryParse(weightController.text),
                       imc: double.tryParse(imcController.text),
@@ -138,6 +140,24 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                 key: _formKey,
                 child: Column(
                   children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            DateFormat(
+                              'dd/MM/yyyy',
+                            ).format(selectedDate).split(' ')[0],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => _selectDate(context),
+                          child: Text(
+                            t.changeDate,
+                            style: TextStyle(color: primaryColor),
+                          ),
+                        ),
+                      ],
+                    ),
                     AppTextFieldWidget(
                       label: t.height,
                       controller: heightController,
@@ -267,5 +287,19 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
         },
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 }

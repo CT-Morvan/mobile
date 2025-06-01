@@ -124,6 +124,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get close => 'Fechar';
 	String license({required Object name}) => 'Licença ${name}';
 	String get openSourceLicenses => 'Licenças de código aberto';
+	String get changeDate => 'Alterar data';
 }
 
 /// Flat map(s) containing all translations.
@@ -216,6 +217,7 @@ extension on Translations {
 			case 'close': return 'Fechar';
 			case 'license': return ({required Object name}) => 'Licença ${name}';
 			case 'openSourceLicenses': return 'Licenças de código aberto';
+			case 'changeDate': return 'Alterar data';
 			default: return null;
 		}
 	}

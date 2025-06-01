@@ -8,6 +8,7 @@ import 'package:ct_morvan_app/widget/fullscreen_message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage(name: "MaximumRepFormViewRoute")
 class MaximumRepFormView extends StatefulWidget {
@@ -23,6 +24,7 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
   final _formKey = GlobalKey<FormState>();
 
   List<MaxRepExerciseModel> items = [];
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -48,7 +50,7 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             _bloc.add(
-              MaxRepSendFormEvent(userId: widget.userId, exercises: items),
+              MaxRepSendFormEvent(userId: widget.userId, exercises: items, date: selectedDate),
             );
           }
         },
@@ -78,93 +80,125 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
           if (state is MaxRepGetFormSuccessState) {
             return Form(
               key: _formKey,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  return Card(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            DateFormat(
+                              'dd/MM/yyyy',
+                            ).format(selectedDate).split(' ')[0],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => _selectDate(context),
+                          child: Text(
+                            t.changeDate,
+                            style: TextStyle(color: primaryColor),
+                          ),
+                        ),
+                      ],
                     ),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name ?? "",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final item = items[index];
+                        return Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.name ?? "",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: textColor,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                AppTextFieldWidget(
+                                  label: t.maxReps,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      item.maxRep =
+                                          value.isNotEmpty
+                                              ? int.parse(value)
+                                              : 0;
+                                    });
+                                  },
+                                  controller: item.maxRepController,
+                                  textInputType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ],
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return t.requiredField;
+                                    }
+                                    if (double.parse(value) < 1) {
+                                      return t.maximumRepMinimum;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 16),
+                                AppTextFieldWidget(
+                                  label: t.maxWorkload,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      item.workload =
+                                          value.isNotEmpty
+                                              ? double.parse(value)
+                                              : 0;
+                                    });
+                                  },
+                                  controller: item.workloadController,
+                                  suffixText: t.kg,
+                                  textInputType:
+                                      TextInputType.numberWithOptions(
+                                        decimal: true,
+                                      ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d+\.?\d{0,2}'),
+                                    ),
+                                  ],
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return t.requiredField;
+                                    }
+                                    if (double.parse(value) < 1) {
+                                      return t.maximumRepWorkloadMinimum;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          AppTextFieldWidget(
-                            label: t.maxReps,
-                            onChanged: (value) {
-                              setState(() {
-                                item.maxRep =
-                                    value.isNotEmpty ? int.parse(value) : 0;
-                              });
-                            },
-                            controller: item.maxRepController,
-                            textInputType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return t.requiredField;
-                              }
-                              if (int.parse(value) < 1) {
-                                return t.maximumRepMinimum;
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 16),
-                          AppTextFieldWidget(
-                            label: t.maxWorkload,
-                            onChanged: (value) {
-                              setState(() {
-                                item.workload =
-                                    value.isNotEmpty ? double.parse(value) : 0;
-                              });
-                            },
-                            controller: item.workloadController,
-                            suffixText: t.kg,
-                            textInputType: TextInputType.numberWithOptions(
-                              decimal: true,
-                            ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp(r'^\d+\.?\d{0,2}'),
-                              ),
-                            ],
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return t.requiredField;
-                              }
-                              if (double.parse(value) < 1) {
-                                return t.maximumRepWorkloadMinimum;
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             );
           }
@@ -191,5 +225,19 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
 
   void _fetchData() {
     _bloc.add(MaxRepGetFormEvent());
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 }

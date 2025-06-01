@@ -30,7 +30,7 @@ class MaxRepFormBloc extends Bloc<MaxRepFormEvent, MaxRepFormState> {
       List<MaxRepCreateModel> maxRepForm = [];
 
       for (final exercise in event.exercises) {
-        maxRepForm.add(exercise.toMaxRepCreateModel());
+        maxRepForm.add(exercise.toMaxRepCreateModel(event.date));
       }
 
       final result =
