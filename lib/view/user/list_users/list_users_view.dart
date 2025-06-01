@@ -226,13 +226,6 @@ class _ListUsersViewState extends State<ListUsersView> {
                             );
                           },
                         ),
-                        BottomSheetItemWidget(
-                          icon: Icons.edit,
-                          text: t.edit,
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
                         if (user.type == UserTypeEnum.patient) ...[
                           BottomSheetItemWidget(
                             icon: Icons.show_chart,

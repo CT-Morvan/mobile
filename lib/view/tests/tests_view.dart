@@ -58,7 +58,7 @@ class _TestsViewState extends State<TestsView> {
                 onTap: () {
                   AutoRouter.of(
                     context,
-                  ).push(MaximumRepResultsViewRoute(user: widget.user));
+                  ).push(BioimpedanceResultViewRoute(user: widget.user));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),

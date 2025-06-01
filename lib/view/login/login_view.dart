@@ -45,7 +45,7 @@ class _LoginViewState extends State<LoginView> {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            AutoRouter.of(context).push(NavigationMenuViewRoute());
+            AutoRouter.of(context).replace(NavigationMenuViewRoute());
           }
           if (state is LoginErrorState) {
             ScaffoldMessenger.of(
