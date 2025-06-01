@@ -47,15 +47,16 @@ class _UserViewState extends State<UserView> {
             ),
           ),
           Expanded(child: SizedBox()),
-          //todo: validar se vai ser desenvolvido
-          // PrimaryButtonWidget(
-          //   onPressed: () {
-          //     AutoRouter.of(context).push(ChangePasswordViewRoute());
-          //   },
-          //   text: t.changePassword,
-          //   padding: EdgeInsets.zero,
-          // ),
           SecondaryButtonWidget(
+            onPressed: () {
+              AutoRouter.of(
+                context,
+              ).push(ChangePasswordViewRoute(userModel: widget.user));
+            },
+            text: t.changePassword,
+            padding: EdgeInsets.zero,
+          ),
+          PrimaryButtonWidget(
             padding: EdgeInsets.only(bottom: 16),
             onPressed: () async {
               await getSdk.logout(context);

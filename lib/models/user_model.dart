@@ -10,8 +10,16 @@ class UserModel {
   final String? email;
   final UserTypeEnum? type;
   final String? token;
+  String? password;
 
-  UserModel({this.id, this.name, this.email, this.type, this.token});
+  UserModel({
+    this.id,
+    this.name,
+    this.email,
+    this.type,
+    this.token,
+    this.password,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

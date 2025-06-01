@@ -5,7 +5,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   final Color backgroundColor;
   final EdgeInsetsGeometry padding;
   final String text;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final bool enabled;
   final bool expanded;
 
@@ -39,9 +39,9 @@ class PrimaryButtonWidget extends StatelessWidget {
   Widget _getButton() {
     return ElevatedButton(
       onPressed:
-          enabled
+          enabled && onPressed != null
               ? () {
-                onPressed();
+                onPressed!();
               }
               : null,
       style: ElevatedButton.styleFrom(

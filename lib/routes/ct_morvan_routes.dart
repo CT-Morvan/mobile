@@ -21,7 +21,6 @@ class CtMorvanRoutes extends RootStackRouter {
       guards: [AuthGuard()],
     ),
     AutoRoute(page: LoginViewRoute.page),
-    AutoRoute(page: FirstLoginViewRoute.page),
     AutoRoute(page: ChangePasswordViewRoute.page),
     AutoRoute(page: MaximumRepResultsViewRoute.page),
     AutoRoute(page: MaximumRepFormViewRoute.page),
@@ -31,6 +30,6 @@ class CtMorvanRoutes extends RootStackRouter {
     AutoRoute(page: UserViewRoute.page),
     AutoRoute(page: BioimpedanceFormViewRoute.page),
     AutoRoute(page: BioimpedanceResultViewRoute.page),
-    AutoRoute(page: LicensesViewRoute.page)
+    AutoRoute(page: LicensesViewRoute.page),
   ];
 }

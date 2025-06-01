@@ -67,6 +67,12 @@ class Sdk {
             data: body,
             queryParameters: parameters,
           );
+        case HttpMethod.put:
+          response = await _dio.put<T>(
+            api.getUrl(),
+            data: body,
+            queryParameters: parameters,
+          );
       }
 
       if (response.data is T) {
