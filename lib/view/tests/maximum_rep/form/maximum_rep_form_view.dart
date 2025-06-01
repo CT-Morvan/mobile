@@ -142,9 +142,13 @@ class _MaximumRepFormViewState extends State<MaximumRepFormView> {
                             },
                             controller: item.workloadController,
                             suffixText: t.kg,
-                            textInputType: TextInputType.number,
+                            textInputType: TextInputType.numberWithOptions(
+                              decimal: true,
+                            ),
                             inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d{0,2}'),
+                              ),
                             ],
                             validator: (value) {
                               if (value == null || value.isEmpty) {

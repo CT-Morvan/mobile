@@ -141,8 +141,14 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                     AppTextFieldWidget(
                       label: t.height,
                       controller: heightController,
-                      textInputType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      textInputType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'),
+                        ),
+                      ],
                       validator: validator,
                       suffixText: t.cm,
                     ),
@@ -151,9 +157,13 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                       child: AppTextFieldWidget(
                         label: t.weight,
                         controller: weightController,
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'),
+                          ),
                         ],
                         validator: validator,
                         suffixText: t.kg,
@@ -162,8 +172,14 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                     AppTextFieldWidget(
                       label: t.imc,
                       controller: imcController,
-                      textInputType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      textInputType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'),
+                        ),
+                      ],
                       validator: validator,
                     ),
                     Padding(
@@ -171,9 +187,13 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                       child: AppTextFieldWidget(
                         label: t.fatPercentage,
                         controller: fatPercentageController,
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'),
+                          ),
                         ],
                         validator: validator,
                         suffixText: t.percentageSymbol,
@@ -182,8 +202,14 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                     AppTextFieldWidget(
                       label: t.musclePercentage,
                       controller: musclePercentageController,
-                      textInputType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      textInputType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'),
+                        ),
+                      ],
                       validator: validator,
                       suffixText: t.percentageSymbol,
                     ),
@@ -192,9 +218,13 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                       child: AppTextFieldWidget(
                         label: t.basalMetabolism,
                         controller: basalMetabolismController,
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'),
+                          ),
                         ],
                         validator: validator,
                       ),
@@ -202,8 +232,14 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                     AppTextFieldWidget(
                       label: t.metabolicAge,
                       controller: metabolicAgeController,
-                      textInputType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      textInputType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'),
+                        ),
+                      ],
                       validator: validator,
                       suffixText: t.years,
                     ),
@@ -212,9 +248,13 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
                       child: AppTextFieldWidget(
                         label: t.visceralFat,
                         controller: visceralFatController,
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'),
+                          ),
                         ],
                         validator: validator,
                       ),
