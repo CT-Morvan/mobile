@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
           headerForegroundColor: whiteColor,
           surfaceTintColor: whiteColor,
         ),
+        dialogTheme: DialogThemeData(backgroundColor: whiteColor),
       ),
       routerDelegate: appRouter.delegate(
         navigatorObservers: () => [AutoRouteObserver()],

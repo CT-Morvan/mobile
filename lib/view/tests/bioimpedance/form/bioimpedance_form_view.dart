@@ -60,7 +60,7 @@ class _BioimpedanceFormViewState extends State<BioimpedanceFormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(t.maximumRepTest)),
+      appBar: AppBar(title: Text(t.bioimpedance)),
       floatingActionButton: FloatingActionButton(
         backgroundColor: isLoading ? grayColor.withAlpha(90) : primaryColor,
         onPressed:
