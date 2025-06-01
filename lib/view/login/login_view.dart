@@ -24,13 +24,6 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    emailController.text = "test@example.com";
-    passwordController.text = "password";
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
