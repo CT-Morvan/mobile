@@ -11,7 +11,7 @@ Aplicativo para acompanhamento dos resultados de treinos em uma academia. Com el
 
 2. Gere os arquivos necessários:
    ```sh
-   dart packages pub run build_runner build --delete-conflicting-outputs
+   dart run build_runner build --delete-conflicting-outputs
    ```
 
 3. Rode o projeto:
